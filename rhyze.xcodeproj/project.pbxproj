@@ -1,0 +1,316 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C58CB16D176968A900240A04 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C58CB16C176968A900240A04 /* UIKit.framework */; };
+		C58CB16F176968A900240A04 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C58CB16E176968A900240A04 /* Foundation.framework */; };
+		C58CB171176968A900240A04 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C58CB170176968A900240A04 /* CoreGraphics.framework */; };
+		C58CB177176968A900240A04 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C58CB175176968A900240A04 /* InfoPlist.strings */; };
+		C58CB179176968A900240A04 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C58CB178176968A900240A04 /* main.m */; };
+		C58CB17D176968A900240A04 /* ALRMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C58CB17C176968A900240A04 /* ALRMAppDelegate.m */; };
+		C58CB17F176968A900240A04 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = C58CB17E176968A900240A04 /* Default.png */; };
+		C58CB181176968A900240A04 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C58CB180176968A900240A04 /* Default@2x.png */; };
+		C58CB183176968A900240A04 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C58CB182176968A900240A04 /* Default-568h@2x.png */; };
+		C58CB186176968A900240A04 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C58CB184176968A900240A04 /* MainStoryboard.storyboard */; };
+		C58CB189176968A900240A04 /* ALRMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C58CB188176968A900240A04 /* ALRMViewController.m */; };
+		C58CB1971769855800240A04 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = C58CB1961769855800240A04 /* plus.png */; };
+		C58CB1991769898B00240A04 /* plus_hightlight.png in Resources */ = {isa = PBXBuildFile; fileRef = C58CB1981769898B00240A04 /* plus_hightlight.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C58CB169176968A900240A04 /* rhyze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rhyze.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C58CB16C176968A900240A04 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C58CB16E176968A900240A04 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C58CB170176968A900240A04 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C58CB174176968A900240A04 /* rhyze-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "rhyze-Info.plist"; sourceTree = "<group>"; };
+		C58CB176176968A900240A04 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C58CB178176968A900240A04 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C58CB17A176968A900240A04 /* rhyze-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "rhyze-Prefix.pch"; sourceTree = "<group>"; };
+		C58CB17B176968A900240A04 /* ALRMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALRMAppDelegate.h; sourceTree = "<group>"; };
+		C58CB17C176968A900240A04 /* ALRMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALRMAppDelegate.m; sourceTree = "<group>"; };
+		C58CB17E176968A900240A04 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		C58CB180176968A900240A04 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		C58CB182176968A900240A04 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		C58CB185176968A900240A04 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		C58CB187176968A900240A04 /* ALRMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALRMViewController.h; sourceTree = "<group>"; };
+		C58CB188176968A900240A04 /* ALRMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALRMViewController.m; sourceTree = "<group>"; };
+		C58CB19217696B7500240A04 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C58CB1961769855800240A04 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
+		C58CB1981769898B00240A04 /* plus_hightlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus_hightlight.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C58CB166176968A900240A04 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C58CB16D176968A900240A04 /* UIKit.framework in Frameworks */,
+				C58CB16F176968A900240A04 /* Foundation.framework in Frameworks */,
+				C58CB171176968A900240A04 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C58CB160176968A900240A04 = {
+			isa = PBXGroup;
+			children = (
+				C58CB19217696B7500240A04 /* QuartzCore.framework */,
+				C58CB172176968A900240A04 /* rhyze */,
+				C58CB16B176968A900240A04 /* Frameworks */,
+				C58CB16A176968A900240A04 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C58CB16A176968A900240A04 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C58CB169176968A900240A04 /* rhyze.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C58CB16B176968A900240A04 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C58CB16C176968A900240A04 /* UIKit.framework */,
+				C58CB16E176968A900240A04 /* Foundation.framework */,
+				C58CB170176968A900240A04 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C58CB172176968A900240A04 /* rhyze */ = {
+			isa = PBXGroup;
+			children = (
+				C58CB17B176968A900240A04 /* ALRMAppDelegate.h */,
+				C58CB17C176968A900240A04 /* ALRMAppDelegate.m */,
+				C58CB184176968A900240A04 /* MainStoryboard.storyboard */,
+				C58CB187176968A900240A04 /* ALRMViewController.h */,
+				C58CB188176968A900240A04 /* ALRMViewController.m */,
+				C58CB173176968A900240A04 /* Supporting Files */,
+			);
+			path = rhyze;
+			sourceTree = "<group>";
+		};
+		C58CB173176968A900240A04 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C58CB1981769898B00240A04 /* plus_hightlight.png */,
+				C58CB1961769855800240A04 /* plus.png */,
+				C58CB174176968A900240A04 /* rhyze-Info.plist */,
+				C58CB175176968A900240A04 /* InfoPlist.strings */,
+				C58CB178176968A900240A04 /* main.m */,
+				C58CB17A176968A900240A04 /* rhyze-Prefix.pch */,
+				C58CB17E176968A900240A04 /* Default.png */,
+				C58CB180176968A900240A04 /* Default@2x.png */,
+				C58CB182176968A900240A04 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C58CB168176968A900240A04 /* rhyze */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C58CB18C176968A900240A04 /* Build configuration list for PBXNativeTarget "rhyze" */;
+			buildPhases = (
+				C58CB165176968A900240A04 /* Sources */,
+				C58CB166176968A900240A04 /* Frameworks */,
+				C58CB167176968A900240A04 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = rhyze;
+			productName = rhyze;
+			productReference = C58CB169176968A900240A04 /* rhyze.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C58CB161176968A900240A04 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = ALRM;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = Geniot;
+			};
+			buildConfigurationList = C58CB164176968A900240A04 /* Build configuration list for PBXProject "rhyze" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C58CB160176968A900240A04;
+			productRefGroup = C58CB16A176968A900240A04 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C58CB168176968A900240A04 /* rhyze */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C58CB167176968A900240A04 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C58CB177176968A900240A04 /* InfoPlist.strings in Resources */,
+				C58CB17F176968A900240A04 /* Default.png in Resources */,
+				C58CB181176968A900240A04 /* Default@2x.png in Resources */,
+				C58CB183176968A900240A04 /* Default-568h@2x.png in Resources */,
+				C58CB186176968A900240A04 /* MainStoryboard.storyboard in Resources */,
+				C58CB1971769855800240A04 /* plus.png in Resources */,
+				C58CB1991769898B00240A04 /* plus_hightlight.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C58CB165176968A900240A04 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C58CB179176968A900240A04 /* main.m in Sources */,
+				C58CB17D176968A900240A04 /* ALRMAppDelegate.m in Sources */,
+				C58CB189176968A900240A04 /* ALRMViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		C58CB175176968A900240A04 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C58CB176176968A900240A04 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C58CB184176968A900240A04 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C58CB185176968A900240A04 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C58CB18A176968A900240A04 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		C58CB18B176968A900240A04 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C58CB18D176968A900240A04 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "rhyze/rhyze-Prefix.pch";
+				INFOPLIST_FILE = "rhyze/rhyze-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C58CB18E176968A900240A04 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "rhyze/rhyze-Prefix.pch";
+				INFOPLIST_FILE = "rhyze/rhyze-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C58CB164176968A900240A04 /* Build configuration list for PBXProject "rhyze" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C58CB18A176968A900240A04 /* Debug */,
+				C58CB18B176968A900240A04 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C58CB18C176968A900240A04 /* Build configuration list for PBXNativeTarget "rhyze" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C58CB18D176968A900240A04 /* Debug */,
+				C58CB18E176968A900240A04 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C58CB161176968A900240A04 /* Project object */;
+}
