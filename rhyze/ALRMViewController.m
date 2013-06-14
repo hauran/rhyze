@@ -20,8 +20,14 @@
 - (IBAction)newAlarmButton:(id)sender {
     NSLog(@"NEW");
     
-    UILabel *newAlarmLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 50, 200, 40)];
+    UILabel *newAlarmLabel = [[UILabel alloc]initWithFrame:CGRectMake(45, 150, 229, 50)];
     [newAlarmLabel setBackgroundColor:[UIColor clearColor]];
+//    [newAlarmLabel setFont:[UIFont systemFontOfSize:30]];
+//   [newAlarmLabel setFont:[UIFont fontNamesForFamilyName: @"Helvetica Neue Light"]];
+    [newAlarmLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:25.0f]];
+
+    newAlarmLabel.textColor = [UIColor colorWithRed:150/255.0f green:120/255.0f blue:155/255.0f alpha:1.0f];
+
     newAlarmLabel.text = [self currentTime];
     [[self view] addSubview:newAlarmLabel];
 }

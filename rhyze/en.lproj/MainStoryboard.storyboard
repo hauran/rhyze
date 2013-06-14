@@ -52,10 +52,10 @@
                         <color key="backgroundColor" red="0.20000001788139343" green="0.015686275437474251" blue="0.20000001788139343" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Rzq-c3-XOa" secondAttribute="trailing" constant="8" id="EdQ-e8-bbd"/>
-                            <constraint firstItem="ahl-gh-UTB" firstAttribute="leading" secondItem="yyC-XM-BvG" secondAttribute="leading" type="default" id="ONU-B1-vsb"/>
+                            <constraint firstItem="yyC-XM-BvG" firstAttribute="leading" secondItem="ahl-gh-UTB" secondAttribute="leading" type="default" id="EjW-DM-BmL"/>
+                            <constraint firstItem="yyC-XM-BvG" firstAttribute="centerX" secondItem="3" secondAttribute="centerX" type="default" id="KN9-nl-o68"/>
                             <constraint firstItem="yyC-XM-BvG" firstAttribute="top" secondItem="3" secondAttribute="top" constant="65" id="SUe-yf-L4g"/>
                             <constraint firstItem="ahl-gh-UTB" firstAttribute="top" secondItem="3" secondAttribute="top" constant="104" id="gCa-bQ-HDw"/>
-                            <constraint firstItem="yyC-XM-BvG" firstAttribute="centerX" secondItem="3" secondAttribute="centerX" type="default" id="xR1-IP-JM0"/>
                             <constraint firstItem="Rzq-c3-XOa" firstAttribute="top" secondItem="3" secondAttribute="top" constant="5" id="xe1-yD-QzC"/>
                         </constraints>
                     </view>
@@ -73,19 +73,6 @@
         <image name="plus.png" width="44" height="44"/>
         <image name="plus_hightlight.png" width="44" height="44"/>
     </resources>
-    <classes>
-        <class className="ALRMViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ALRMViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="newAlarmButton:"/>
-                <relationship kind="outlet" name="currentDate" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="currentTime" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
