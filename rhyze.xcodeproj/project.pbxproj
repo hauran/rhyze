@@ -23,7 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C58CB169176968A900240A04 /* rhyze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rhyze.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C58CB169176968A900240A04 /* Rise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C58CB16C176968A900240A04 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C58CB16E176968A900240A04 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C58CB170176968A900240A04 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -71,7 +71,7 @@
 		C58CB16A176968A900240A04 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C58CB169176968A900240A04 /* rhyze.app */,
+				C58CB169176968A900240A04 /* Rise.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -132,7 +132,7 @@
 			);
 			name = rhyze;
 			productName = rhyze;
-			productReference = C58CB169176968A900240A04 /* rhyze.app */;
+			productReference = C58CB169176968A900240A04 /* Rise.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -274,7 +274,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "rhyze/rhyze-Prefix.pch";
 				INFOPLIST_FILE = "rhyze/rhyze-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Rise;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -285,7 +285,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "rhyze/rhyze-Prefix.pch";
 				INFOPLIST_FILE = "rhyze/rhyze-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Rise;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -309,6 +309,7 @@
 				C58CB18E176968A900240A04 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
