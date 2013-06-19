@@ -53,10 +53,10 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Rzq-c3-XOa" secondAttribute="trailing" constant="8" id="EdQ-e8-bbd"/>
-                            <constraint firstItem="yyC-XM-BvG" firstAttribute="leading" secondItem="ahl-gh-UTB" secondAttribute="leading" type="default" id="EjW-DM-BmL"/>
-                            <constraint firstItem="yyC-XM-BvG" firstAttribute="centerX" secondItem="3" secondAttribute="centerX" type="default" id="KN9-nl-o68"/>
-                            <constraint firstItem="yyC-XM-BvG" firstAttribute="top" secondItem="3" secondAttribute="top" constant="65" id="SUe-yf-L4g"/>
-                            <constraint firstItem="ahl-gh-UTB" firstAttribute="top" secondItem="3" secondAttribute="top" constant="104" id="gCa-bQ-HDw"/>
+                            <constraint firstItem="ahl-gh-UTB" firstAttribute="top" secondItem="3" secondAttribute="top" constant="106" id="Hfe-yz-j4i"/>
+                            <constraint firstItem="ahl-gh-UTB" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="jEX-LS-RsG"/>
+                            <constraint firstItem="yyC-XM-BvG" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="jq3-vo-svV"/>
+                            <constraint firstItem="yyC-XM-BvG" firstAttribute="top" secondItem="3" secondAttribute="top" constant="67" id="kT0-8x-LoB"/>
                             <constraint firstItem="Rzq-c3-XOa" firstAttribute="top" secondItem="3" secondAttribute="top" constant="5" id="xe1-yD-QzC"/>
                         </constraints>
                         <connections>
@@ -83,6 +83,21 @@
         <image name="plus.png" width="44" height="44"/>
         <image name="plus_hightlight.png" width="44" height="44"/>
     </resources>
+    <classes>
+        <class className="ALRMViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ALRMViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="handlePan:" candidateClass="UIGestureRecognizer"/>
+                <relationship kind="action" name="newAlarmButton:"/>
+                <relationship kind="outlet" name="currentDate" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="currentTime" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="viewPan" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -7,6 +7,8 @@
 //
 
 #import "ALRMViewController.h"
+#import "UIBorderLabel.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface ALRMViewController ()
 
@@ -18,14 +20,20 @@
 @synthesize currentDate = _currentDate;
 @synthesize viewPan = _viewPan;
 NSString *newAlarmTime;
+int panDirection;
 
-- (IBAction)newAlarmButton:(id)sender {
-    UILabel *newAlarmLabel = (UILabel *)[self.view viewWithTag:1];
-    if (![newAlarmLabel isKindOfClass:[UILabel class]]) {
-        NSLog(@"NEW");
+- (IBAction)newAlarmButton:(id)sender {    
+    UIBorderLabel *newAlarmLabel = (UIBorderLabel *)[self.view viewWithTag:1];
+    
+    
+    if (![newAlarmLabel isKindOfClass:[UIBorderLabel class]]) {
+        newAlarmLabel = [[UIBorderLabel alloc]initWithFrame:CGRectMake(10, 150, 290, 50)];
+        UIColor *bgColor = [UIColor colorWithRed:0/255.0f green:1/255.0f blue:0/255.0f alpha:1.0f];
+        [newAlarmLabel setBackgroundColor:bgColor];
+        newAlarmLabel.layer.cornerRadius = 10;
+        newAlarmLabel.leftInset = 15;
         
-        newAlarmLabel = [[UILabel alloc]initWithFrame:CGRectMake(45, 150, 229, 50)];
-        [newAlarmLabel setBackgroundColor:[UIColor clearColor]];
+        
 //    [newAlarmLabel setFont:[UIFont systemFontOfSize:30]];
 //   [newAlarmLabel setFont:[UIFont fontNamesForFamilyName: @"Helvetica Neue Light"]];
         [newAlarmLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:25.0f]];
@@ -37,6 +45,18 @@ NSString *newAlarmTime;
         newAlarmTime = newAlarmLabel.text;
         
         [[self view] addSubview:newAlarmLabel];
+        
+        UIImage *saveAlarmImage = [UIImage imageNamed:@"save.png"];
+        UIImage *saveAlarmImageOver = [UIImage imageNamed:@"saveOver.png"];
+        
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+       // [button addTarget:self action:@selector(aMethod:) forControlEvents:UIControlEventTouchDown];
+        [button setBackgroundImage:saveAlarmImage forState:UIControlStateNormal];
+        [button setBackgroundImage:saveAlarmImageOver forState:UIControlStateHighlighted];
+//        [button setImage:[UIImage imageNamed:@"saveOver.png"] forState:UIControlStateSelected | UIControlStateHighlighted];
+
+        button.frame = CGRectMake(253.0, 155.0, 40.0, 40.0);
+        [[self view] addSubview:button];
     }
 }
 
@@ -47,7 +67,6 @@ NSString *newAlarmTime;
     [timeFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
     [timeFormatter setDateStyle:NSDateFormatterNoStyle];
     [timeFormatter setTimeStyle:NSDateFormatterShortStyle];
-    
     return[timeFormatter stringFromDate:date];
 }
 
@@ -102,14 +121,52 @@ NSString *newAlarmTime;
         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
         [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
         
-        [dateString appendFormat:@"%@ %@",[NSMutableString stringWithString:[dateFormatter stringFromDate:currDate]], newAlarmTime ];
+        [dateString appendFormat:@"%@ %@",[NSMutableString stringWithString:[dateFormatter stringFromDate:currDate]], newAlarmTime];
         
         NSDateFormatter *currentAlarmFormat = [[NSDateFormatter alloc] init];
         [currentAlarmFormat setDateFormat:@"MMM dd, yyyy hh:mm a"];
-        NSDate *currentAlarm = [currentAlarmFormat dateFromString:dateString]; 
+        NSDate *currentAlarm = [currentAlarmFormat dateFromString:dateString];
         
-        NSDate* newDate = [currentAlarm dateByAddingTimeInterval:translation.y/-2 * 60];
-        newAlarmLabel.text=[self dateToTime:newDate];
+        CGFloat velocityY = [(UIPanGestureRecognizer*)sender velocityInView:self.view].y;
+//      NSLog([NSString stringWithFormat: @"%.2f", velocityY]);
+    
+        //direction change
+        if(velocityY < 0 && panDirection != 1) {
+            panDirection = 1;
+            [dateString setString:@""];
+            [dateString appendFormat:@"%@ %@",[NSMutableString stringWithString:[dateFormatter stringFromDate:currDate]], newAlarmLabel.text];
+            
+            currentAlarm = [currentAlarmFormat dateFromString:dateString];
+        }
+        else if(velocityY > 0 && panDirection != 0) {
+            panDirection = 0;
+            [dateString setString:@""];
+            [dateString appendFormat:@"%@ %@",[NSMutableString stringWithString:[dateFormatter stringFromDate:currDate]], newAlarmLabel.text];
+            
+            currentAlarm = [currentAlarmFormat dateFromString:dateString];
+        }
+        
+        NSDate *newDate;
+        if(fabs(velocityY) <10){
+            [dateString setString:@""];
+            [dateString appendFormat:@"%@ %@",[NSMutableString stringWithString:[dateFormatter stringFromDate:currDate]], newAlarmLabel.text];
+            currentAlarm = [currentAlarmFormat dateFromString:dateString];
+            newAlarmLabel.text=[self dateToTime:currentAlarm];
+            
+            if(panDirection == 1) {
+                newDate = [currentAlarm dateByAddingTimeInterval:60];
+            }
+            else {
+                newDate = [currentAlarm dateByAddingTimeInterval:-60];
+            }
+
+            newAlarmLabel.text=[self dateToTime:newDate];
+        }
+        else {
+            newDate = [currentAlarm dateByAddingTimeInterval:translation.y/-2 * 60];
+            newAlarmLabel.text=[self dateToTime:newDate];
+        }
+        
         
         if(sender.state == UIGestureRecognizerStateEnded)
         {

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C500E2041770353600BBAFA4 /* UIBorderLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C500E2031770353600BBAFA4 /* UIBorderLabel.m */; };
+		C500E2061771587100BBAFA4 /* save.png in Resources */ = {isa = PBXBuildFile; fileRef = C500E2051771587100BBAFA4 /* save.png */; };
+		C500E208177168EE00BBAFA4 /* saveOver.png in Resources */ = {isa = PBXBuildFile; fileRef = C500E207177168EE00BBAFA4 /* saveOver.png */; };
 		C58CB16D176968A900240A04 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C58CB16C176968A900240A04 /* UIKit.framework */; };
 		C58CB16F176968A900240A04 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C58CB16E176968A900240A04 /* Foundation.framework */; };
 		C58CB171176968A900240A04 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C58CB170176968A900240A04 /* CoreGraphics.framework */; };
@@ -23,6 +26,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C500E2021770353600BBAFA4 /* UIBorderLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBorderLabel.h; sourceTree = "<group>"; };
+		C500E2031770353600BBAFA4 /* UIBorderLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBorderLabel.m; sourceTree = "<group>"; };
+		C500E2051771587100BBAFA4 /* save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save.png; sourceTree = "<group>"; };
+		C500E207177168EE00BBAFA4 /* saveOver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = saveOver.png; sourceTree = "<group>"; };
 		C58CB169176968A900240A04 /* Rise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C58CB16C176968A900240A04 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C58CB16E176968A900240A04 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -95,6 +102,8 @@
 				C58CB187176968A900240A04 /* ALRMViewController.h */,
 				C58CB188176968A900240A04 /* ALRMViewController.m */,
 				C58CB173176968A900240A04 /* Supporting Files */,
+				C500E2021770353600BBAFA4 /* UIBorderLabel.h */,
+				C500E2031770353600BBAFA4 /* UIBorderLabel.m */,
 			);
 			path = rhyze;
 			sourceTree = "<group>";
@@ -102,6 +111,8 @@
 		C58CB173176968A900240A04 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C500E207177168EE00BBAFA4 /* saveOver.png */,
+				C500E2051771587100BBAFA4 /* save.png */,
 				C58CB1981769898B00240A04 /* plus_hightlight.png */,
 				C58CB1961769855800240A04 /* plus.png */,
 				C58CB174176968A900240A04 /* rhyze-Info.plist */,
@@ -174,6 +185,8 @@
 				C58CB186176968A900240A04 /* MainStoryboard.storyboard in Resources */,
 				C58CB1971769855800240A04 /* plus.png in Resources */,
 				C58CB1991769898B00240A04 /* plus_hightlight.png in Resources */,
+				C500E2061771587100BBAFA4 /* save.png in Resources */,
+				C500E208177168EE00BBAFA4 /* saveOver.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +200,7 @@
 				C58CB179176968A900240A04 /* main.m in Sources */,
 				C58CB17D176968A900240A04 /* ALRMAppDelegate.m in Sources */,
 				C58CB189176968A900240A04 /* ALRMViewController.m in Sources */,
+				C500E2041770353600BBAFA4 /* UIBorderLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,7 +251,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -261,7 +275,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
