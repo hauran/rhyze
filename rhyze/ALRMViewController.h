@@ -13,5 +13,6 @@
 
 
 - (IBAction)handlePan:(UIGestureRecognizer *)sender;
+- (void)saveAlarmClick: (id)sender;
 
 @end

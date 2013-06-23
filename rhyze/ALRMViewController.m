@@ -21,14 +21,17 @@
 @synthesize viewPan = _viewPan;
 NSString *newAlarmTime;
 int panDirection;
+UIColor *bgColor;
+NSMutableArray *alarmArray;
+NSString *alarmCacheFilename;
 
-- (IBAction)newAlarmButton:(id)sender {    
+- (IBAction)newAlarmButton:(id)sender {
     UIBorderLabel *newAlarmLabel = (UIBorderLabel *)[self.view viewWithTag:1];
     
     
     if (![newAlarmLabel isKindOfClass:[UIBorderLabel class]]) {
         newAlarmLabel = [[UIBorderLabel alloc]initWithFrame:CGRectMake(10, 150, 290, 50)];
-        UIColor *bgColor = [UIColor colorWithRed:0/255.0f green:1/255.0f blue:0/255.0f alpha:1.0f];
+        UIColor *bgColor = [UIColor colorWithRed:0/255.0f green:0/255.0f blue:0/255.0f alpha:1.0f];
         [newAlarmLabel setBackgroundColor:bgColor];
         newAlarmLabel.layer.cornerRadius = 10;
         newAlarmLabel.leftInset = 15;
@@ -49,15 +52,34 @@ int panDirection;
         UIImage *saveAlarmImage = [UIImage imageNamed:@"save.png"];
         UIImage *saveAlarmImageOver = [UIImage imageNamed:@"saveOver.png"];
         
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-       // [button addTarget:self action:@selector(aMethod:) forControlEvents:UIControlEventTouchDown];
-        [button setBackgroundImage:saveAlarmImage forState:UIControlStateNormal];
-        [button setBackgroundImage:saveAlarmImageOver forState:UIControlStateHighlighted];
-//        [button setImage:[UIImage imageNamed:@"saveOver.png"] forState:UIControlStateSelected | UIControlStateHighlighted];
+        UIButton *saveAlarm = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [saveAlarm addTarget:self action:@selector(saveAlarmClick:) forControlEvents:UIControlEventTouchDown];
+        [saveAlarm setBackgroundImage:saveAlarmImage forState:UIControlStateNormal];
+        [saveAlarm setBackgroundImage:saveAlarmImageOver forState:UIControlStateHighlighted];
+        saveAlarm.tag = 2;
 
-        button.frame = CGRectMake(253.0, 155.0, 40.0, 40.0);
-        [[self view] addSubview:button];
+        saveAlarm.frame = CGRectMake(253.0, 155.0, 40.0, 40.0);
+        [[self view] addSubview:saveAlarm];
     }
+}
+
+- (void) saveAlarmClick: (id)sender
+{
+    UIBorderLabel *newAlarmLabel = (UIBorderLabel *)[self.view viewWithTag:1];
+    UIButton *newAlarmBtn = (UIButton *)[self.view viewWithTag:2];
+    
+    NSString *newAlarm = newAlarmLabel.text;
+ 
+    [UIView animateWithDuration:0.5 animations:^{newAlarmBtn.alpha = 0.0;}];
+    
+    [UIView transitionWithView:newAlarmLabel duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        [newAlarmLabel setBackgroundColor:bgColor];
+    } completion:nil];
+    
+    [alarmArray addObject:newAlarm];
+    [alarmArray writeToFile:alarmCacheFilename atomically:YES];
+    
+	NSLog(@"%@", alarmArray);
 }
 
 
@@ -100,7 +122,40 @@ int panDirection;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    bgColor = [UIColor colorWithRed:34/255.0f green:8/255.0f blue:39/255.0f alpha:1.0f];
+    self.view.backgroundColor = bgColor;
     [self updateTime];
+    [self loadSavedAlarms];
+}
+
+
+- (void) loadSavedAlarms {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0];
+    alarmCacheFilename = [documentsPath stringByAppendingPathComponent:@"geniotAlarm.plist"];
+    alarmArray = [[NSMutableArray alloc] initWithContentsOfFile:alarmCacheFilename];
+    if (alarmArray == nil) {
+        alarmArray = [[NSMutableArray alloc] init];
+    }
+	NSLog(@"%@", alarmArray);
+    for (int i=0; i<[alarmArray count]; i++) {
+        [self loadSavedAlarm: [alarmArray objectAtIndex:i]: &i];
+    }
+}
+
+- (void)loadSavedAlarm:(NSString *)time: (NSInteger *) index{
+    UIBorderLabel *newAlarmLabel = [[UIBorderLabel alloc]initWithFrame:CGRectMake(10, 150, 290, 50)];
+    [newAlarmLabel setBackgroundColor:bgColor];
+    newAlarmLabel.layer.cornerRadius = 10;
+    newAlarmLabel.leftInset = 15;
+    [newAlarmLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:25.0f]];
+        
+    newAlarmLabel.textColor = [UIColor colorWithRed:150/255.0f green:120/255.0f blue:155/255.0f alpha:1.0f];
+        
+    newAlarmLabel.text = time;
+    newAlarmLabel.tag = [NSString stringWithFormat:@"%d", (int)index];
+    [[self view] addSubview:newAlarmLabel];
 }
 
 - (void)didReceiveMemoryWarning
