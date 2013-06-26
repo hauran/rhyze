@@ -140,12 +140,13 @@ NSString *alarmCacheFilename;
     }
 	NSLog(@"%@", alarmArray);
     for (int i=0; i<[alarmArray count]; i++) {
-        [self loadSavedAlarm: [alarmArray objectAtIndex:i]: &i];
+        [self loadSavedAlarm: [alarmArray objectAtIndex:i]: i];
     }
 }
 
-- (void)loadSavedAlarm:(NSString *)time: (NSInteger *) index{
-    UIBorderLabel *newAlarmLabel = [[UIBorderLabel alloc]initWithFrame:CGRectMake(10, 150, 290, 50)];
+- (void)loadSavedAlarm:(NSString *)time: (int) index{
+    CGFloat top = (CGFloat)(150 + (50 * index));
+    UIBorderLabel *newAlarmLabel = [[UIBorderLabel alloc]initWithFrame:CGRectMake(10, top, 290, 50)];
     [newAlarmLabel setBackgroundColor:bgColor];
     newAlarmLabel.layer.cornerRadius = 10;
     newAlarmLabel.leftInset = 15;
@@ -154,9 +155,26 @@ NSString *alarmCacheFilename;
     newAlarmLabel.textColor = [UIColor colorWithRed:150/255.0f green:120/255.0f blue:155/255.0f alpha:1.0f];
         
     newAlarmLabel.text = time;
-    newAlarmLabel.tag = [NSString stringWithFormat:@"%d", (int)index];
+    newAlarmLabel.tag = index;
+    
     [[self view] addSubview:newAlarmLabel];
+    
+//    UISwipeGestureRecognizer *swipeAlarm = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showDeleteButton:)];
+//    [swipeAlarm setDirection:UISwipeGestureRecognizerDirectionRight];
+    
+    UITapGestureRecognizer *editAlarm = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editAlarm:)];
+    editAlarm.numberOfTapsRequired = 1;
+
+    [newAlarmLabel setUserInteractionEnabled:YES];
+    [newAlarmLabel addGestureRecognizer:editAlarm];
 }
+
+- (IBAction)editAlarm:(UIGestureRecognizer *)alarmTapped{
+    int tag = alarmTapped.view.tag;
+    NSLog(@"%d", tag);
+    UILabel *alarm = (UILabel *)[self.view viewWithTag:tag];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
