@@ -11,9 +11,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *currentDate;
 @property (weak, nonatomic) IBOutlet UIView *viewPan;
 
-
 - (IBAction)handlePan:(UIGestureRecognizer *)sender;
-
 - (void)saveAlarmClick: (id)sender;
-
 @end

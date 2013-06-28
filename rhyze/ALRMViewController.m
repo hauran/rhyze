@@ -24,9 +24,14 @@ int panDirection;
 UIColor *bgColor;
 NSMutableArray *alarmArray;
 NSString *alarmCacheFilename;
+UIScrollView *scrollView;
+
+int newAlarmLabelTag = 1000;
+int saveNewAlarmBtnTag = 1001;
+int scrollViewTag = 999;
 
 - (IBAction)newAlarmButton:(id)sender {
-    UIBorderLabel *newAlarmLabel = (UIBorderLabel *)[self.view viewWithTag:1];
+    UIBorderLabel *newAlarmLabel = (UIBorderLabel *)[self.view viewWithTag:newAlarmLabelTag];
     
     
     if (![newAlarmLabel isKindOfClass:[UIBorderLabel class]]) {
@@ -44,7 +49,7 @@ NSString *alarmCacheFilename;
         newAlarmLabel.textColor = [UIColor colorWithRed:150/255.0f green:120/255.0f blue:155/255.0f alpha:1.0f];
 
         newAlarmLabel.text = [self currentTime];
-        newAlarmLabel.tag = 1;
+        newAlarmLabel.tag = newAlarmLabelTag;
         newAlarmTime = newAlarmLabel.text;
         
         [[self view] addSubview:newAlarmLabel];
@@ -56,20 +61,21 @@ NSString *alarmCacheFilename;
         [saveAlarm addTarget:self action:@selector(saveAlarmClick:) forControlEvents:UIControlEventTouchDown];
         [saveAlarm setBackgroundImage:saveAlarmImage forState:UIControlStateNormal];
         [saveAlarm setBackgroundImage:saveAlarmImageOver forState:UIControlStateHighlighted];
-        saveAlarm.tag = 2;
+        saveAlarm.tag = saveNewAlarmBtnTag;
 
         saveAlarm.frame = CGRectMake(253.0, 155.0, 40.0, 40.0);
         [[self view] addSubview:saveAlarm];
+        
     }
 }
 
 - (void) saveAlarmClick: (id)sender
 {
-    UIBorderLabel *newAlarmLabel = (UIBorderLabel *)[self.view viewWithTag:1];
-    UIButton *newAlarmBtn = (UIButton *)[self.view viewWithTag:2];
+    UIBorderLabel *newAlarmLabel = (UIBorderLabel *)[self.view viewWithTag:newAlarmLabelTag];
+    UIButton *newAlarmBtn = (UIButton *)[self.view viewWithTag:saveNewAlarmBtnTag];
     
     NSString *newAlarm = newAlarmLabel.text;
- 
+    
     [UIView animateWithDuration:0.5 animations:^{newAlarmBtn.alpha = 0.0;}];
     
     [UIView transitionWithView:newAlarmLabel duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
@@ -125,6 +131,11 @@ NSString *alarmCacheFilename;
     
     bgColor = [UIColor colorWithRed:34/255.0f green:8/255.0f blue:39/255.0f alpha:1.0f];
     self.view.backgroundColor = bgColor;
+    
+    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.height-100)];
+//    scrollView.backgroundColor = [UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0f];;
+    [self.view addSubview:scrollView];
+    
     [self updateTime];
     [self loadSavedAlarms];
 }
@@ -145,7 +156,8 @@ NSString *alarmCacheFilename;
 }
 
 - (void)loadSavedAlarm:(NSString *)time: (int) index{
-    CGFloat top = (CGFloat)(150 + (50 * index));
+    CGFloat top = (CGFloat)(50 * index);
+    NSLog(@"%f", top);
     UIBorderLabel *newAlarmLabel = [[UIBorderLabel alloc]initWithFrame:CGRectMake(10, top, 290, 50)];
     [newAlarmLabel setBackgroundColor:bgColor];
     newAlarmLabel.layer.cornerRadius = 10;
@@ -157,7 +169,7 @@ NSString *alarmCacheFilename;
     newAlarmLabel.text = time;
     newAlarmLabel.tag = index;
     
-    [[self view] addSubview:newAlarmLabel];
+    [scrollView addSubview:newAlarmLabel];
     
 //    UISwipeGestureRecognizer *swipeAlarm = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showDeleteButton:)];
 //    [swipeAlarm setDirection:UISwipeGestureRecognizerDirectionRight];
@@ -167,7 +179,30 @@ NSString *alarmCacheFilename;
 
     [newAlarmLabel setUserInteractionEnabled:YES];
     [newAlarmLabel addGestureRecognizer:editAlarm];
+    
+    [self resizeScrollView];
 }
+
+
+
+- (void) resizeScrollView {
+    CGFloat scrollViewHeight = 0.0f;
+    for (UIView* view in scrollView.subviews)
+    {
+        scrollViewHeight += view.frame.size.height;
+    }
+    
+//    scrollView.contentSize = CGSizeMake(self.view.frame.size.width * numberOfViews, self.view.frame.size.height);
+    
+    
+    NSLog(@"height:");
+    NSLog(@"%f",scrollViewHeight);
+    
+    
+    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, scrollViewHeight);
+}
+
+
 
 - (IBAction)editAlarm:(UIGestureRecognizer *)alarmTapped{
     int tag = alarmTapped.view.tag;
@@ -182,8 +217,9 @@ NSString *alarmCacheFilename;
     // Dispose of any resources that can be recreated.
 }
 
+
 - (IBAction)handlePan:(UIGestureRecognizer *)sender{
-    UILabel *newAlarmLabel = (UILabel *)[self.view viewWithTag:1];
+    UILabel *newAlarmLabel = (UILabel *)[self.view viewWithTag:newAlarmLabelTag];
     if ([newAlarmLabel isKindOfClass:[UILabel class]]) {
         CGPoint translation = [(UIPanGestureRecognizer *) sender translationInView:_viewPan];
         NSMutableString *dateString = [[NSMutableString alloc] init];
