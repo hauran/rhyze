@@ -5,6 +5,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NewAlarmModalViewController.h"
 
 @interface ALRMViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *currentTime;
@@ -12,5 +13,4 @@
 @property (weak, nonatomic) IBOutlet UIView *viewPan;
 
 - (IBAction)handlePan:(UIGestureRecognizer *)sender;
-- (void)saveAlarmClick: (id)sender;
 @end

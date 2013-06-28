@@ -7,9 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1873E4D7177D42A200C39B1E /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 1873E4D1177D42A200C39B1E /* add.png */; };
+		1873E4D8177D42A200C39B1E /* addOver.png in Resources */ = {isa = PBXBuildFile; fileRef = 1873E4D2177D42A200C39B1E /* addOver.png */; };
+		1873E4D9177D42A200C39B1E /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 1873E4D3177D42A200C39B1E /* close.png */; };
+		1873E4DA177D42A200C39B1E /* closeOver.png in Resources */ = {isa = PBXBuildFile; fileRef = 1873E4D4177D42A200C39B1E /* closeOver.png */; };
+		1873E4DB177D42A200C39B1E /* save.png in Resources */ = {isa = PBXBuildFile; fileRef = 1873E4D5177D42A200C39B1E /* save.png */; };
+		1873E4DC177D42A200C39B1E /* saveOver.png in Resources */ = {isa = PBXBuildFile; fileRef = 1873E4D6177D42A200C39B1E /* saveOver.png */; };
 		C500E2041770353600BBAFA4 /* UIBorderLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C500E2031770353600BBAFA4 /* UIBorderLabel.m */; };
-		C500E2061771587100BBAFA4 /* save.png in Resources */ = {isa = PBXBuildFile; fileRef = C500E2051771587100BBAFA4 /* save.png */; };
-		C500E208177168EE00BBAFA4 /* saveOver.png in Resources */ = {isa = PBXBuildFile; fileRef = C500E207177168EE00BBAFA4 /* saveOver.png */; };
+		C5413E52177D146F008D648E /* NewAlarmModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5413E50177D146F008D648E /* NewAlarmModalViewController.m */; };
+		C5413E53177D146F008D648E /* NewAlarmModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5413E51177D146F008D648E /* NewAlarmModalViewController.xib */; };
 		C58CB16D176968A900240A04 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C58CB16C176968A900240A04 /* UIKit.framework */; };
 		C58CB16F176968A900240A04 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C58CB16E176968A900240A04 /* Foundation.framework */; };
 		C58CB171176968A900240A04 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C58CB170176968A900240A04 /* CoreGraphics.framework */; };
@@ -21,15 +27,20 @@
 		C58CB183176968A900240A04 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C58CB182176968A900240A04 /* Default-568h@2x.png */; };
 		C58CB186176968A900240A04 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C58CB184176968A900240A04 /* MainStoryboard.storyboard */; };
 		C58CB189176968A900240A04 /* ALRMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C58CB188176968A900240A04 /* ALRMViewController.m */; };
-		C58CB1971769855800240A04 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = C58CB1961769855800240A04 /* plus.png */; };
-		C58CB1991769898B00240A04 /* plus_hightlight.png in Resources */ = {isa = PBXBuildFile; fileRef = C58CB1981769898B00240A04 /* plus_hightlight.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1873E4D1177D42A200C39B1E /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
+		1873E4D2177D42A200C39B1E /* addOver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addOver.png; sourceTree = "<group>"; };
+		1873E4D3177D42A200C39B1E /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
+		1873E4D4177D42A200C39B1E /* closeOver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closeOver.png; sourceTree = "<group>"; };
+		1873E4D5177D42A200C39B1E /* save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save.png; sourceTree = "<group>"; };
+		1873E4D6177D42A200C39B1E /* saveOver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = saveOver.png; sourceTree = "<group>"; };
 		C500E2021770353600BBAFA4 /* UIBorderLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBorderLabel.h; sourceTree = "<group>"; };
 		C500E2031770353600BBAFA4 /* UIBorderLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBorderLabel.m; sourceTree = "<group>"; };
-		C500E2051771587100BBAFA4 /* save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save.png; sourceTree = "<group>"; };
-		C500E207177168EE00BBAFA4 /* saveOver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = saveOver.png; sourceTree = "<group>"; };
+		C5413E4F177D146F008D648E /* NewAlarmModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewAlarmModalViewController.h; sourceTree = "<group>"; };
+		C5413E50177D146F008D648E /* NewAlarmModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewAlarmModalViewController.m; sourceTree = "<group>"; };
+		C5413E51177D146F008D648E /* NewAlarmModalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewAlarmModalViewController.xib; sourceTree = "<group>"; };
 		C58CB169176968A900240A04 /* Rise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C58CB16C176968A900240A04 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C58CB16E176968A900240A04 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -47,8 +58,6 @@
 		C58CB187176968A900240A04 /* ALRMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALRMViewController.h; sourceTree = "<group>"; };
 		C58CB188176968A900240A04 /* ALRMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALRMViewController.m; sourceTree = "<group>"; };
 		C58CB19217696B7500240A04 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		C58CB1961769855800240A04 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
-		C58CB1981769898B00240A04 /* plus_hightlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus_hightlight.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +113,9 @@
 				C58CB173176968A900240A04 /* Supporting Files */,
 				C500E2021770353600BBAFA4 /* UIBorderLabel.h */,
 				C500E2031770353600BBAFA4 /* UIBorderLabel.m */,
+				C5413E4F177D146F008D648E /* NewAlarmModalViewController.h */,
+				C5413E50177D146F008D648E /* NewAlarmModalViewController.m */,
+				C5413E51177D146F008D648E /* NewAlarmModalViewController.xib */,
 			);
 			path = rhyze;
 			sourceTree = "<group>";
@@ -111,10 +123,12 @@
 		C58CB173176968A900240A04 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C500E207177168EE00BBAFA4 /* saveOver.png */,
-				C500E2051771587100BBAFA4 /* save.png */,
-				C58CB1981769898B00240A04 /* plus_hightlight.png */,
-				C58CB1961769855800240A04 /* plus.png */,
+				1873E4D1177D42A200C39B1E /* add.png */,
+				1873E4D2177D42A200C39B1E /* addOver.png */,
+				1873E4D3177D42A200C39B1E /* close.png */,
+				1873E4D4177D42A200C39B1E /* closeOver.png */,
+				1873E4D5177D42A200C39B1E /* save.png */,
+				1873E4D6177D42A200C39B1E /* saveOver.png */,
 				C58CB174176968A900240A04 /* rhyze-Info.plist */,
 				C58CB175176968A900240A04 /* InfoPlist.strings */,
 				C58CB178176968A900240A04 /* main.m */,
@@ -183,10 +197,13 @@
 				C58CB181176968A900240A04 /* Default@2x.png in Resources */,
 				C58CB183176968A900240A04 /* Default-568h@2x.png in Resources */,
 				C58CB186176968A900240A04 /* MainStoryboard.storyboard in Resources */,
-				C58CB1971769855800240A04 /* plus.png in Resources */,
-				C58CB1991769898B00240A04 /* plus_hightlight.png in Resources */,
-				C500E2061771587100BBAFA4 /* save.png in Resources */,
-				C500E208177168EE00BBAFA4 /* saveOver.png in Resources */,
+				C5413E53177D146F008D648E /* NewAlarmModalViewController.xib in Resources */,
+				1873E4D7177D42A200C39B1E /* add.png in Resources */,
+				1873E4D8177D42A200C39B1E /* addOver.png in Resources */,
+				1873E4D9177D42A200C39B1E /* close.png in Resources */,
+				1873E4DA177D42A200C39B1E /* closeOver.png in Resources */,
+				1873E4DB177D42A200C39B1E /* save.png in Resources */,
+				1873E4DC177D42A200C39B1E /* saveOver.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +218,7 @@
 				C58CB17D176968A900240A04 /* ALRMAppDelegate.m in Sources */,
 				C58CB189176968A900240A04 /* ALRMViewController.m in Sources */,
 				C500E2041770353600BBAFA4 /* UIBorderLabel.m in Sources */,
+				C5413E52177D146F008D648E /* NewAlarmModalViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

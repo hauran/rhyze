@@ -8,6 +8,7 @@
 
 #import "ALRMViewController.h"
 #import "UIBorderLabel.h"
+#import "NewAlarmModalViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface ALRMViewController ()
@@ -26,67 +27,33 @@ NSMutableArray *alarmArray;
 NSString *alarmCacheFilename;
 UIScrollView *scrollView;
 
-int newAlarmLabelTag = 1000;
-int saveNewAlarmBtnTag = 1001;
 int scrollViewTag = 999;
 
 - (IBAction)newAlarmButton:(id)sender {
-    UIBorderLabel *newAlarmLabel = (UIBorderLabel *)[self.view viewWithTag:newAlarmLabelTag];
+    NewAlarmModalViewController *newAlarm = [[NewAlarmModalViewController alloc] init];
     
-    
-    if (![newAlarmLabel isKindOfClass:[UIBorderLabel class]]) {
-        newAlarmLabel = [[UIBorderLabel alloc]initWithFrame:CGRectMake(10, 150, 290, 50)];
-        UIColor *bgColor = [UIColor colorWithRed:0/255.0f green:0/255.0f blue:0/255.0f alpha:1.0f];
-        [newAlarmLabel setBackgroundColor:bgColor];
-        newAlarmLabel.layer.cornerRadius = 10;
-        newAlarmLabel.leftInset = 15;
-        
-        
-//    [newAlarmLabel setFont:[UIFont systemFontOfSize:30]];
-//   [newAlarmLabel setFont:[UIFont fontNamesForFamilyName: @"Helvetica Neue Light"]];
-        [newAlarmLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:25.0f]];
-
-        newAlarmLabel.textColor = [UIColor colorWithRed:150/255.0f green:120/255.0f blue:155/255.0f alpha:1.0f];
-
-        newAlarmLabel.text = [self currentTime];
-        newAlarmLabel.tag = newAlarmLabelTag;
-        newAlarmTime = newAlarmLabel.text;
-        
-        [[self view] addSubview:newAlarmLabel];
-        
-        UIImage *saveAlarmImage = [UIImage imageNamed:@"save.png"];
-        UIImage *saveAlarmImageOver = [UIImage imageNamed:@"saveOver.png"];
-        
-        UIButton *saveAlarm = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [saveAlarm addTarget:self action:@selector(saveAlarmClick:) forControlEvents:UIControlEventTouchDown];
-        [saveAlarm setBackgroundImage:saveAlarmImage forState:UIControlStateNormal];
-        [saveAlarm setBackgroundImage:saveAlarmImageOver forState:UIControlStateHighlighted];
-        saveAlarm.tag = saveNewAlarmBtnTag;
-
-        saveAlarm.frame = CGRectMake(253.0, 155.0, 40.0, 40.0);
-        [[self view] addSubview:saveAlarm];
-        
-    }
+    newAlarm.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:newAlarm animated:YES completion:nil];
 }
-
-- (void) saveAlarmClick: (id)sender
-{
-    UIBorderLabel *newAlarmLabel = (UIBorderLabel *)[self.view viewWithTag:newAlarmLabelTag];
-    UIButton *newAlarmBtn = (UIButton *)[self.view viewWithTag:saveNewAlarmBtnTag];
-    
-    NSString *newAlarm = newAlarmLabel.text;
-    
-    [UIView animateWithDuration:0.5 animations:^{newAlarmBtn.alpha = 0.0;}];
-    
-    [UIView transitionWithView:newAlarmLabel duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        [newAlarmLabel setBackgroundColor:bgColor];
-    } completion:nil];
-    
-    [alarmArray addObject:newAlarm];
-    [alarmArray writeToFile:alarmCacheFilename atomically:YES];
-    
-	NSLog(@"%@", alarmArray);
-}
+//
+//- (void) saveAlarmClick: (id)sender
+//{
+//    UIBorderLabel *newAlarmLabel = (UIBorderLabel *)[self.view viewWithTag:newAlarmLabelTag];
+//    UIButton *newAlarmBtn = (UIButton *)[self.view viewWithTag:saveNewAlarmBtnTag];
+//    
+//    NSString *newAlarm = newAlarmLabel.text;
+//    
+//    [UIView animateWithDuration:0.5 animations:^{newAlarmBtn.alpha = 0.0;}];
+//    
+//    [UIView transitionWithView:newAlarmLabel duration:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+//        [newAlarmLabel setBackgroundColor:bgColor];
+//    } completion:nil];
+//    
+//    [alarmArray addObject:newAlarm];
+//    [alarmArray writeToFile:alarmCacheFilename atomically:YES];
+//    
+//	NSLog(@"%@", alarmArray);
+//}
 
 
 - (NSString *)dateToTime: (NSDate *)date{
@@ -128,8 +95,8 @@ int scrollViewTag = 999;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
-    bgColor = [UIColor colorWithRed:34/255.0f green:8/255.0f blue:39/255.0f alpha:1.0f];
+
+    bgColor = [UIColor colorWithRed:40/255.0f green:40/255.0f blue:40/255.0f alpha:1.0f];
     self.view.backgroundColor = bgColor;
     
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.height-100)];
@@ -158,14 +125,13 @@ int scrollViewTag = 999;
 - (void)loadSavedAlarm:(NSString *)time: (int) index{
     CGFloat top = (CGFloat)(50 * index);
     NSLog(@"%f", top);
-    UIBorderLabel *newAlarmLabel = [[UIBorderLabel alloc]initWithFrame:CGRectMake(10, top, 290, 50)];
+    UILabel *newAlarmLabel = [[UILabel alloc]initWithFrame:CGRectMake(25, top, 125, 50)];
     [newAlarmLabel setBackgroundColor:bgColor];
     newAlarmLabel.layer.cornerRadius = 10;
-    newAlarmLabel.leftInset = 15;
     [newAlarmLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:25.0f]];
         
     newAlarmLabel.textColor = [UIColor colorWithRed:150/255.0f green:120/255.0f blue:155/255.0f alpha:1.0f];
-        
+    newAlarmLabel.textAlignment = UITextAlignmentRight;
     newAlarmLabel.text = time;
     newAlarmLabel.tag = index;
     
@@ -219,69 +185,69 @@ int scrollViewTag = 999;
 
 
 - (IBAction)handlePan:(UIGestureRecognizer *)sender{
-    UILabel *newAlarmLabel = (UILabel *)[self.view viewWithTag:newAlarmLabelTag];
-    if ([newAlarmLabel isKindOfClass:[UILabel class]]) {
-        CGPoint translation = [(UIPanGestureRecognizer *) sender translationInView:_viewPan];
-        NSMutableString *dateString = [[NSMutableString alloc] init];
-        
-        NSDate *currDate = [NSDate date];
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
-        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-        
-        [dateString appendFormat:@"%@ %@",[NSMutableString stringWithString:[dateFormatter stringFromDate:currDate]], newAlarmTime];
-        
-        NSDateFormatter *currentAlarmFormat = [[NSDateFormatter alloc] init];
-        [currentAlarmFormat setDateFormat:@"MMM dd, yyyy hh:mm a"];
-        NSDate *currentAlarm = [currentAlarmFormat dateFromString:dateString];
-        
-        CGFloat velocityY = [(UIPanGestureRecognizer*)sender velocityInView:self.view].y;
-//      NSLog([NSString stringWithFormat: @"%.2f", velocityY]);
-    
-        //direction change
-        if(velocityY < 0 && panDirection != 1) {
-            panDirection = 1;
-            [dateString setString:@""];
-            [dateString appendFormat:@"%@ %@",[NSMutableString stringWithString:[dateFormatter stringFromDate:currDate]], newAlarmLabel.text];
-            
-            currentAlarm = [currentAlarmFormat dateFromString:dateString];
-        }
-        else if(velocityY > 0 && panDirection != 0) {
-            panDirection = 0;
-            [dateString setString:@""];
-            [dateString appendFormat:@"%@ %@",[NSMutableString stringWithString:[dateFormatter stringFromDate:currDate]], newAlarmLabel.text];
-            
-            currentAlarm = [currentAlarmFormat dateFromString:dateString];
-        }
-        
-        NSDate *newDate;
-        if(fabs(velocityY) <10){
-            [dateString setString:@""];
-            [dateString appendFormat:@"%@ %@",[NSMutableString stringWithString:[dateFormatter stringFromDate:currDate]], newAlarmLabel.text];
-            currentAlarm = [currentAlarmFormat dateFromString:dateString];
-            newAlarmLabel.text=[self dateToTime:currentAlarm];
-            
-            if(panDirection == 1) {
-                newDate = [currentAlarm dateByAddingTimeInterval:60];
-            }
-            else {
-                newDate = [currentAlarm dateByAddingTimeInterval:-60];
-            }
-
-            newAlarmLabel.text=[self dateToTime:newDate];
-        }
-        else {
-            newDate = [currentAlarm dateByAddingTimeInterval:translation.y/-2 * 60];
-            newAlarmLabel.text=[self dateToTime:newDate];
-        }
-        
-        
-        if(sender.state == UIGestureRecognizerStateEnded)
-        {
-            newAlarmTime = newAlarmLabel.text;
-        }
-    }
+//    UILabel *newAlarmLabel = (UILabel *)[self.view viewWithTag:newAlarmLabelTag];
+//    if ([newAlarmLabel isKindOfClass:[UILabel class]]) {
+//        CGPoint translation = [(UIPanGestureRecognizer *) sender translationInView:_viewPan];
+//        NSMutableString *dateString = [[NSMutableString alloc] init];
+//        
+//        NSDate *currDate = [NSDate date];
+//        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//        [dateFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
+//        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+//        [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+//        
+//        [dateString appendFormat:@"%@ %@",[NSMutableString stringWithString:[dateFormatter stringFromDate:currDate]], newAlarmTime];
+//        
+//        NSDateFormatter *currentAlarmFormat = [[NSDateFormatter alloc] init];
+//        [currentAlarmFormat setDateFormat:@"MMM dd, yyyy hh:mm a"];
+//        NSDate *currentAlarm = [currentAlarmFormat dateFromString:dateString];
+//        
+//        CGFloat velocityY = [(UIPanGestureRecognizer*)sender velocityInView:self.view].y;
+////      NSLog([NSString stringWithFormat: @"%.2f", velocityY]);
+//    
+//        //direction change
+//        if(velocityY < 0 && panDirection != 1) {
+//            panDirection = 1;
+//            [dateString setString:@""];
+//            [dateString appendFormat:@"%@ %@",[NSMutableString stringWithString:[dateFormatter stringFromDate:currDate]], newAlarmLabel.text];
+//            
+//            currentAlarm = [currentAlarmFormat dateFromString:dateString];
+//        }
+//        else if(velocityY > 0 && panDirection != 0) {
+//            panDirection = 0;
+//            [dateString setString:@""];
+//            [dateString appendFormat:@"%@ %@",[NSMutableString stringWithString:[dateFormatter stringFromDate:currDate]], newAlarmLabel.text];
+//            
+//            currentAlarm = [currentAlarmFormat dateFromString:dateString];
+//        }
+//        
+//        NSDate *newDate;
+//        if(fabs(velocityY) <10){
+//            [dateString setString:@""];
+//            [dateString appendFormat:@"%@ %@",[NSMutableString stringWithString:[dateFormatter stringFromDate:currDate]], newAlarmLabel.text];
+//            currentAlarm = [currentAlarmFormat dateFromString:dateString];
+//            newAlarmLabel.text=[self dateToTime:currentAlarm];
+//            
+//            if(panDirection == 1) {
+//                newDate = [currentAlarm dateByAddingTimeInterval:60];
+//            }
+//            else {
+//                newDate = [currentAlarm dateByAddingTimeInterval:-60];
+//            }
+//
+//            newAlarmLabel.text=[self dateToTime:newDate];
+//        }
+//        else {
+//            newDate = [currentAlarm dateByAddingTimeInterval:translation.y/-2 * 60];
+//            newAlarmLabel.text=[self dateToTime:newDate];
+//        }
+//        
+//        
+//        if(sender.state == UIGestureRecognizerStateEnded)
+//        {
+//            newAlarmTime = newAlarmLabel.text;
+//        }
+//    }
 }
 
 @end

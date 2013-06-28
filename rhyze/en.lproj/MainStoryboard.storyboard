@@ -18,7 +18,7 @@
                                     <constraint firstAttribute="height" constant="47" id="z49-xm-hI5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="30"/>
-                                <color key="textColor" red="0.7057317935288453" green="0.0" blue="0.79734205163043481" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.64313725490196072" green="0.41176470588235292" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Jan 12, 2013" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahl-gh-UTB">
@@ -27,7 +27,7 @@
                                     <constraint firstAttribute="width" constant="172" id="o2E-25-SVm"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                <color key="textColor" red="0.54514859134828419" green="0.0" blue="0.61591372282608692" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.50980392156862742" green="0.41176470588235292" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rzq-c3-XOa">
@@ -37,11 +37,11 @@
                                     <constraint firstAttribute="width" constant="28" id="adp-bT-YRo"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="plus.png">
+                                <state key="normal" image="add.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="plus_hightlight.png">
+                                <state key="highlighted" image="addOver.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -52,9 +52,9 @@
                         <color key="backgroundColor" red="0.96470217064364006" green="0.96670698415770595" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Rzq-c3-XOa" secondAttribute="trailing" constant="8" id="EdQ-e8-bbd"/>
+                            <constraint firstItem="ahl-gh-UTB" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="24" id="Gnf-fJ-8Re"/>
+                            <constraint firstAttribute="trailing" secondItem="Rzq-c3-XOa" secondAttribute="trailing" constant="6" id="TCl-RQ-Yrr"/>
                             <constraint firstItem="yyC-XM-BvG" firstAttribute="top" secondItem="3" secondAttribute="top" constant="19" id="gSH-tB-pH9"/>
-                            <constraint firstItem="ahl-gh-UTB" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="jEX-LS-RsG"/>
                             <constraint firstItem="yyC-XM-BvG" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="jq3-vo-svV"/>
                             <constraint firstItem="ahl-gh-UTB" firstAttribute="top" secondItem="3" secondAttribute="top" constant="58" id="v63-iQ-zUJ"/>
                             <constraint firstItem="Rzq-c3-XOa" firstAttribute="top" secondItem="3" secondAttribute="top" constant="5" id="xe1-yD-QzC"/>
@@ -80,9 +80,25 @@
         </scene>
     </scenes>
     <resources>
-        <image name="plus.png" width="44" height="44"/>
-        <image name="plus_hightlight.png" width="44" height="44"/>
+        <image name="add.png" width="288" height="288"/>
+        <image name="addOver.png" width="288" height="288"/>
     </resources>
+    <classes>
+        <class className="ALRMViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ALRMViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="editAlarm:" candidateClass="UIGestureRecognizer"/>
+                <relationship kind="action" name="handlePan:" candidateClass="UIGestureRecognizer"/>
+                <relationship kind="action" name="newAlarmButton:"/>
+                <relationship kind="outlet" name="currentDate" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="currentTime" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="viewPan" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
