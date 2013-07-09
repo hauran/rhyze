@@ -10,7 +10,8 @@
 @interface ALRMViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *currentTime;
 @property (weak, nonatomic) IBOutlet UILabel *currentDate;
-@property (weak, nonatomic) IBOutlet UIView *viewPan;
 
-- (IBAction)handlePan:(UIGestureRecognizer *)sender;
+@property (nonatomic, assign) int deleteDisplayedTag;
+
+- (void)saveAlarmClick:(NSString *)newAlarmTime;
 @end

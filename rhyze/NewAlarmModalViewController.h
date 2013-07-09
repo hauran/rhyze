@@ -12,4 +12,7 @@
 - (IBAction)CloseSaveAlarmModal:(UIButton *)sender;
 - (IBAction)SaveNewAlarm:(UIButton *)sender;
 
+@property(nonatomic, weak) NSMutableString *currentTime;
+
+
 @end

@@ -59,22 +59,13 @@
                             <constraint firstItem="ahl-gh-UTB" firstAttribute="top" secondItem="3" secondAttribute="top" constant="58" id="v63-iQ-zUJ"/>
                             <constraint firstItem="Rzq-c3-XOa" firstAttribute="top" secondItem="3" secondAttribute="top" constant="5" id="xe1-yD-QzC"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="pVg-2f-9oL" appends="YES" id="3ZX-Ka-kEM"/>
-                        </connections>
                     </view>
                     <connections>
                         <outlet property="CurrentTime" destination="yyC-XM-BvG" id="TbK-u8-Kho"/>
                         <outlet property="currentDate" destination="ahl-gh-UTB" id="WQG-y0-u3u"/>
-                        <outlet property="viewPan" destination="3" id="s8f-eA-ZBN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="pVg-2f-9oL">
-                    <connections>
-                        <action selector="handlePan:" destination="2" id="Fvt-AO-aVL"/>
-                    </connections>
-                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="214" y="126"/>
         </scene>
@@ -88,11 +79,9 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ALRMViewController.h"/>
             <relationships>
                 <relationship kind="action" name="editAlarm:" candidateClass="UIGestureRecognizer"/>
-                <relationship kind="action" name="handlePan:" candidateClass="UIGestureRecognizer"/>
                 <relationship kind="action" name="newAlarmButton:"/>
                 <relationship kind="outlet" name="currentDate" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="currentTime" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="viewPan" candidateClass="UIView"/>
             </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
