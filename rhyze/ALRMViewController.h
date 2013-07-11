@@ -6,12 +6,13 @@
 
 #import <UIKit/UIKit.h>
 #import "NewAlarmModalViewController.h"
+#import "UIBorderLabel.h"
 
 @interface ALRMViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *currentTime;
 @property (weak, nonatomic) IBOutlet UILabel *currentDate;
 
-@property (nonatomic, assign) int deleteDisplayedTag;
+@property UIView *deleteDisplayedLabel;
 
 - (void)saveAlarmClick:(NSString *)newAlarmTime;
 @end

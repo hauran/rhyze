@@ -103,7 +103,7 @@ UIBorderLabel *newAlarmLabel;
     [currentAlarmFormat setDateFormat:@"MMM dd, yyyy hh:mm a"];
     NSDate *currentAlarm = [currentAlarmFormat dateFromString:dateString];
 
-    CGFloat velocityY = [(UIPanGestureRecognizer*)recognizer velocityInView:self.view].y;
+//    CGFloat velocityY = [(UIPanGestureRecognizer*)recognizer velocityInView:self.view].y;
 //    NSLog([NSString stringWithFormat: @"%.2f", velocityY]);
     
     //direction change
@@ -213,8 +213,6 @@ UIBorderLabel *newAlarmLabel;
 
 - (IBAction)SaveNewAlarm:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
-    
-    ALRMViewController *controller = [[ALRMViewController alloc] init];
-    [controller saveAlarmClick:newAlarmTime];
+    [(ALRMViewController *)self.presentingViewController saveAlarmClick:newAlarmTime];
 }
 @end

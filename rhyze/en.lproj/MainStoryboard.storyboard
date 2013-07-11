@@ -74,20 +74,6 @@
         <image name="add.png" width="288" height="288"/>
         <image name="addOver.png" width="288" height="288"/>
     </resources>
-    <classes>
-        <class className="ALRMViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ALRMViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="editAlarm:" candidateClass="UIGestureRecognizer"/>
-                <relationship kind="action" name="newAlarmButton:"/>
-                <relationship kind="outlet" name="currentDate" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="currentTime" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
