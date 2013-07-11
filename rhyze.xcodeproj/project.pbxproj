@@ -41,6 +41,9 @@
 		C5413E4F177D146F008D648E /* NewAlarmModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewAlarmModalViewController.h; sourceTree = "<group>"; };
 		C5413E50177D146F008D648E /* NewAlarmModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewAlarmModalViewController.m; sourceTree = "<group>"; };
 		C5413E51177D146F008D648E /* NewAlarmModalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewAlarmModalViewController.xib; sourceTree = "<group>"; };
+		C57E9D73178E57CC00F436E0 /* NSString+FontAwesome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+FontAwesome.h"; sourceTree = "<group>"; };
+		C57E9D74178E57CC00F436E0 /* NSString+FontAwesome.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+FontAwesome.m"; sourceTree = "<group>"; };
+		C57E9D79178E596600F436E0 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		C58CB169176968A900240A04 /* Rise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C58CB16C176968A900240A04 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C58CB16E176968A900240A04 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -105,6 +108,8 @@
 		C58CB172176968A900240A04 /* rhyze */ = {
 			isa = PBXGroup;
 			children = (
+				C57E9D73178E57CC00F436E0 /* NSString+FontAwesome.h */,
+				C57E9D74178E57CC00F436E0 /* NSString+FontAwesome.m */,
 				C58CB17B176968A900240A04 /* ALRMAppDelegate.h */,
 				C58CB17C176968A900240A04 /* ALRMAppDelegate.m */,
 				C58CB184176968A900240A04 /* MainStoryboard.storyboard */,
@@ -123,6 +128,7 @@
 		C58CB173176968A900240A04 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C57E9D79178E596600F436E0 /* FontAwesome.ttf */,
 				1873E4D1177D42A200C39B1E /* add.png */,
 				1873E4D2177D42A200C39B1E /* addOver.png */,
 				1873E4D3177D42A200C39B1E /* close.png */,

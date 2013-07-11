@@ -11,6 +11,7 @@
 #import "NewAlarmModalViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
+
 @interface ALRMViewController ()
 
 @end
@@ -81,7 +82,14 @@ int scrollViewTag = 999;
     [dateString appendString:[dayFormatter stringFromDate:[NSDate date]]];
     [dateString appendString:@", "];
     [dateString appendString:[NSMutableString stringWithString:[dateFormatter stringFromDate:currDate]]];
-    _currentTime.text = (NSString *)[self currentTime];
+    
+    id github  = [NSString fontAwesomeIconStringForEnum:FAIconGithub];
+    _currentTime.font = [UIFont fontWithName:kFontAwesomeFamilyName size:32.f];
+
+//    [NSString fontAwesomeEnumForIconIdentifier:@"icon-giuthub"];
+    _currentTime.text = [NSString stringWithFormat:@"%@", github];
+    
+//    _currentTime.text = (NSString *)[self currentTime];
     _currentDate.text = dateString;
     [self performSelector:@selector(updateTime) withObject:self afterDelay:1.0];
 }
