@@ -7,15 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1873E4D7177D42A200C39B1E /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = 1873E4D1177D42A200C39B1E /* add.png */; };
-		1873E4D8177D42A200C39B1E /* addOver.png in Resources */ = {isa = PBXBuildFile; fileRef = 1873E4D2177D42A200C39B1E /* addOver.png */; };
-		1873E4D9177D42A200C39B1E /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 1873E4D3177D42A200C39B1E /* close.png */; };
-		1873E4DA177D42A200C39B1E /* closeOver.png in Resources */ = {isa = PBXBuildFile; fileRef = 1873E4D4177D42A200C39B1E /* closeOver.png */; };
-		1873E4DB177D42A200C39B1E /* save.png in Resources */ = {isa = PBXBuildFile; fileRef = 1873E4D5177D42A200C39B1E /* save.png */; };
-		1873E4DC177D42A200C39B1E /* saveOver.png in Resources */ = {isa = PBXBuildFile; fileRef = 1873E4D6177D42A200C39B1E /* saveOver.png */; };
 		C500E2041770353600BBAFA4 /* UIBorderLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C500E2031770353600BBAFA4 /* UIBorderLabel.m */; };
 		C5413E52177D146F008D648E /* NewAlarmModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5413E50177D146F008D648E /* NewAlarmModalViewController.m */; };
 		C5413E53177D146F008D648E /* NewAlarmModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5413E51177D146F008D648E /* NewAlarmModalViewController.xib */; };
+		C57E9D7C178E6E9E00F436E0 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C57E9D7B178E6E9E00F436E0 /* FontAwesome.ttf */; };
+		C57E9D87178E6FC200F436E0 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = C57E9D81178E6FC200F436E0 /* add.png */; };
+		C57E9D88178E6FC200F436E0 /* addOver.png in Resources */ = {isa = PBXBuildFile; fileRef = C57E9D82178E6FC200F436E0 /* addOver.png */; };
+		C57E9D89178E6FC200F436E0 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = C57E9D83178E6FC200F436E0 /* close.png */; };
+		C57E9D8A178E6FC200F436E0 /* closeOver.png in Resources */ = {isa = PBXBuildFile; fileRef = C57E9D84178E6FC200F436E0 /* closeOver.png */; };
+		C57E9D8B178E6FC200F436E0 /* save.png in Resources */ = {isa = PBXBuildFile; fileRef = C57E9D85178E6FC200F436E0 /* save.png */; };
+		C57E9D8C178E6FC200F436E0 /* saveOver.png in Resources */ = {isa = PBXBuildFile; fileRef = C57E9D86178E6FC200F436E0 /* saveOver.png */; };
 		C58CB16D176968A900240A04 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C58CB16C176968A900240A04 /* UIKit.framework */; };
 		C58CB16F176968A900240A04 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C58CB16E176968A900240A04 /* Foundation.framework */; };
 		C58CB171176968A900240A04 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C58CB170176968A900240A04 /* CoreGraphics.framework */; };
@@ -30,20 +31,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1873E4D1177D42A200C39B1E /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
-		1873E4D2177D42A200C39B1E /* addOver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addOver.png; sourceTree = "<group>"; };
-		1873E4D3177D42A200C39B1E /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
-		1873E4D4177D42A200C39B1E /* closeOver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closeOver.png; sourceTree = "<group>"; };
-		1873E4D5177D42A200C39B1E /* save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save.png; sourceTree = "<group>"; };
-		1873E4D6177D42A200C39B1E /* saveOver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = saveOver.png; sourceTree = "<group>"; };
 		C500E2021770353600BBAFA4 /* UIBorderLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBorderLabel.h; sourceTree = "<group>"; };
 		C500E2031770353600BBAFA4 /* UIBorderLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBorderLabel.m; sourceTree = "<group>"; };
 		C5413E4F177D146F008D648E /* NewAlarmModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewAlarmModalViewController.h; sourceTree = "<group>"; };
 		C5413E50177D146F008D648E /* NewAlarmModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewAlarmModalViewController.m; sourceTree = "<group>"; };
 		C5413E51177D146F008D648E /* NewAlarmModalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewAlarmModalViewController.xib; sourceTree = "<group>"; };
-		C57E9D73178E57CC00F436E0 /* NSString+FontAwesome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+FontAwesome.h"; sourceTree = "<group>"; };
-		C57E9D74178E57CC00F436E0 /* NSString+FontAwesome.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+FontAwesome.m"; sourceTree = "<group>"; };
-		C57E9D79178E596600F436E0 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		C57E9D7B178E6E9E00F436E0 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = Resources/FontAwesome.ttf; sourceTree = "<group>"; };
+		C57E9D81178E6FC200F436E0 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add.png; path = Resources/add.png; sourceTree = "<group>"; };
+		C57E9D82178E6FC200F436E0 /* addOver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = addOver.png; path = Resources/addOver.png; sourceTree = "<group>"; };
+		C57E9D83178E6FC200F436E0 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = close.png; path = Resources/close.png; sourceTree = "<group>"; };
+		C57E9D84178E6FC200F436E0 /* closeOver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = closeOver.png; path = Resources/closeOver.png; sourceTree = "<group>"; };
+		C57E9D85178E6FC200F436E0 /* save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = save.png; path = Resources/save.png; sourceTree = "<group>"; };
+		C57E9D86178E6FC200F436E0 /* saveOver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = saveOver.png; path = Resources/saveOver.png; sourceTree = "<group>"; };
+		C57E9D8D178E705800F436E0 /* NSString+FontAwesome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSString+FontAwesome.h"; path = "rhyze/NSString+FontAwesome.h"; sourceTree = "<group>"; };
+		C57E9D8E178E705800F436E0 /* NSString+FontAwesome.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NSString+FontAwesome.m"; path = "rhyze/NSString+FontAwesome.m"; sourceTree = "<group>"; };
 		C58CB169176968A900240A04 /* Rise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C58CB16C176968A900240A04 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C58CB16E176968A900240A04 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -80,6 +81,8 @@
 		C58CB160176968A900240A04 = {
 			isa = PBXGroup;
 			children = (
+				C57E9D8D178E705800F436E0 /* NSString+FontAwesome.h */,
+				C57E9D8E178E705800F436E0 /* NSString+FontAwesome.m */,
 				C58CB19217696B7500240A04 /* QuartzCore.framework */,
 				C58CB172176968A900240A04 /* rhyze */,
 				C58CB16B176968A900240A04 /* Frameworks */,
@@ -108,8 +111,6 @@
 		C58CB172176968A900240A04 /* rhyze */ = {
 			isa = PBXGroup;
 			children = (
-				C57E9D73178E57CC00F436E0 /* NSString+FontAwesome.h */,
-				C57E9D74178E57CC00F436E0 /* NSString+FontAwesome.m */,
 				C58CB17B176968A900240A04 /* ALRMAppDelegate.h */,
 				C58CB17C176968A900240A04 /* ALRMAppDelegate.m */,
 				C58CB184176968A900240A04 /* MainStoryboard.storyboard */,
@@ -128,13 +129,13 @@
 		C58CB173176968A900240A04 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C57E9D79178E596600F436E0 /* FontAwesome.ttf */,
-				1873E4D1177D42A200C39B1E /* add.png */,
-				1873E4D2177D42A200C39B1E /* addOver.png */,
-				1873E4D3177D42A200C39B1E /* close.png */,
-				1873E4D4177D42A200C39B1E /* closeOver.png */,
-				1873E4D5177D42A200C39B1E /* save.png */,
-				1873E4D6177D42A200C39B1E /* saveOver.png */,
+				C57E9D81178E6FC200F436E0 /* add.png */,
+				C57E9D82178E6FC200F436E0 /* addOver.png */,
+				C57E9D83178E6FC200F436E0 /* close.png */,
+				C57E9D84178E6FC200F436E0 /* closeOver.png */,
+				C57E9D85178E6FC200F436E0 /* save.png */,
+				C57E9D86178E6FC200F436E0 /* saveOver.png */,
+				C57E9D7B178E6E9E00F436E0 /* FontAwesome.ttf */,
 				C58CB174176968A900240A04 /* rhyze-Info.plist */,
 				C58CB175176968A900240A04 /* InfoPlist.strings */,
 				C58CB178176968A900240A04 /* main.m */,
@@ -204,12 +205,13 @@
 				C58CB183176968A900240A04 /* Default-568h@2x.png in Resources */,
 				C58CB186176968A900240A04 /* MainStoryboard.storyboard in Resources */,
 				C5413E53177D146F008D648E /* NewAlarmModalViewController.xib in Resources */,
-				1873E4D7177D42A200C39B1E /* add.png in Resources */,
-				1873E4D8177D42A200C39B1E /* addOver.png in Resources */,
-				1873E4D9177D42A200C39B1E /* close.png in Resources */,
-				1873E4DA177D42A200C39B1E /* closeOver.png in Resources */,
-				1873E4DB177D42A200C39B1E /* save.png in Resources */,
-				1873E4DC177D42A200C39B1E /* saveOver.png in Resources */,
+				C57E9D7C178E6E9E00F436E0 /* FontAwesome.ttf in Resources */,
+				C57E9D87178E6FC200F436E0 /* add.png in Resources */,
+				C57E9D88178E6FC200F436E0 /* addOver.png in Resources */,
+				C57E9D89178E6FC200F436E0 /* close.png in Resources */,
+				C57E9D8A178E6FC200F436E0 /* closeOver.png in Resources */,
+				C57E9D8B178E6FC200F436E0 /* save.png in Resources */,
+				C57E9D8C178E6FC200F436E0 /* saveOver.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,8 +10,7 @@
 #import "UIBorderLabel.h"
 #import "NewAlarmModalViewController.h"
 #import <QuartzCore/QuartzCore.h>
-
-
+#import "NSString+FontAwesome.m"
 @interface ALRMViewController ()
 
 @end
@@ -23,6 +22,7 @@
 @synthesize deleteDisplayedLabel = _deleteDisplayedLabel;
 
 UIColor *bgColor;
+UIColor *textColor;
 NSMutableArray *alarmArray;
 NSString *alarmCacheFilename;
 UIScrollView *scrollView;
@@ -32,7 +32,7 @@ int alarmIndex = 11;
 int scrollViewTag = 999;
 
 
-- (IBAction)newAlarmButton:(id)sender {
+- (IBAction)showNewAlarmModal:(UIGestureRecognizer *)newAlarmTapped{
     NewAlarmModalViewController *newAlarm = [[NewAlarmModalViewController alloc] init];
     newAlarm.currentTime = _currentTime.text;
     newAlarm.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
@@ -58,7 +58,7 @@ int scrollViewTag = 999;
     [timeFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
     [timeFormatter setDateStyle:NSDateFormatterNoStyle];
     [timeFormatter setTimeStyle:NSDateFormatterShortStyle];
-    return[timeFormatter stringFromDate:date];
+    return [[timeFormatter stringFromDate:date] lowercaseString];
 }
 
 
@@ -83,13 +83,7 @@ int scrollViewTag = 999;
     [dateString appendString:@", "];
     [dateString appendString:[NSMutableString stringWithString:[dateFormatter stringFromDate:currDate]]];
     
-    id github  = [NSString fontAwesomeIconStringForEnum:FAIconGithub];
-    _currentTime.font = [UIFont fontWithName:kFontAwesomeFamilyName size:32.f];
-
-//    [NSString fontAwesomeEnumForIconIdentifier:@"icon-giuthub"];
-    _currentTime.text = [NSString stringWithFormat:@"%@", github];
-    
-//    _currentTime.text = (NSString *)[self currentTime];
+    _currentTime.text = (NSString *)[self currentTime];
     _currentDate.text = dateString;
     [self performSelector:@selector(updateTime) withObject:self afterDelay:1.0];
 }
@@ -98,7 +92,7 @@ int scrollViewTag = 999;
 {
         [super viewDidLoad];
         // Do any additional setup after loading the view, typically from a nib.
-        bgColor = [UIColor colorWithRed:40/255.0f green:40/255.0f blue:40/255.0f alpha:1.0f];
+        bgColor = [UIColor colorWithRed:0/255.0f green:0/255.0f blue:0/255.0f alpha:1.0f];
         self.view.backgroundColor = bgColor;
     
         scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.height-100)];
@@ -119,6 +113,44 @@ int scrollViewTag = 999;
         hideDeleteButton2.numberOfTapsRequired = 1;
         [scrollView addGestureRecognizer:hideDeleteButton2];
         [self.view addSubview:scrollView];
+    
+        textColor = [UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0f];
+    
+        _currentTime.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:40.f];
+        _currentTime.textColor = textColor;
+    
+        _currentDate.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:19.f];
+        _currentDate.textColor = textColor;
+    
+    
+        UIButton *newAlarmButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        newAlarmButton.backgroundColor = [UIColor clearColor];
+        newAlarmButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:25.f];
+        [newAlarmButton setTitleColor:textColor forState:UIControlStateNormal];
+        [newAlarmButton setTitle:[NSString fontAwesomeIconStringForIconIdentifier:@"icon-plus-sign"] forState: UIControlStateNormal];
+        newAlarmButton.frame = CGRectMake(screenWidth-35, 10, 40.0, 40.0);
+    
+        UITapGestureRecognizer *newAlarmModal = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showNewAlarmModal:)];
+        newAlarmModal.numberOfTapsRequired = 1;
+        [newAlarmButton setUserInteractionEnabled:YES];
+        [newAlarmButton addGestureRecognizer:newAlarmModal];
+        [self.view addSubview:newAlarmButton];
+
+    
+    NSArray *familyNames = [[NSArray alloc] initWithArray:[UIFont familyNames]];
+    NSArray *fontNames;
+    NSInteger indFamily, indFont;
+    for (indFamily=0; indFamily<[familyNames count]; ++indFamily)
+    {
+        NSLog(@"Family name: %@", [familyNames objectAtIndex:indFamily]);
+        fontNames = [[NSArray alloc] initWithArray:
+                     [UIFont fontNamesForFamilyName:
+                      [familyNames objectAtIndex:indFamily]]];
+        for (indFont=0; indFont<[fontNames count]; ++indFont)
+        {
+            NSLog(@"    Font name: %@", [fontNames objectAtIndex:indFont]);
+        }
+    }
 }
 
 - (void) loadSavedAlarms {
@@ -143,18 +175,18 @@ int scrollViewTag = 999;
     [newAlarmLabel setBackgroundColor:bgColor];
     
     [newAlarmLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:25.0f]];
-    
-    newAlarmLabel.textColor = [UIColor colorWithRed:150/255.0f green:120/255.0f blue:155/255.0f alpha:1.0f];
+//    newAlarmLabel.layer.cornerRadius = 10;
+    newAlarmLabel.textColor = textColor;
     newAlarmLabel.textAlignment = NSTextAlignmentRight;
     newAlarmLabel.text = time;
     
-    UIImage *deleteAlarmImge = [UIImage imageNamed:@"close.png"];
-    UIImage *deleteAlarmImageOver = [UIImage imageNamed:@"closeOver.png"];
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.backgroundColor = [UIColor clearColor];
+    button.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:25.f];
+    [button setTitleColor:textColor forState:UIControlStateNormal];
+    [button setTitle:[NSString fontAwesomeIconStringForIconIdentifier:@"icon-remove-sign"] forState: UIControlStateNormal];
     [button addTarget:self action:@selector(aMethod:) forControlEvents:UIControlEventTouchDown];
-    [button setBackgroundImage:deleteAlarmImge forState:UIControlStateNormal];
-    [button setBackgroundImage:deleteAlarmImageOver forState:UIControlStateHighlighted];
-    button.frame = CGRectMake(screenWidth-50, 5, 0, 40.0);
+    button.frame = CGRectMake(screenWidth - 40, 10, 0, 30.0);
     
     [newAlarmLabel addSubview:button];
     
@@ -185,7 +217,7 @@ int scrollViewTag = 999;
     [button setUserInteractionEnabled:YES];
     [button addGestureRecognizer:deleteAlarm];
     
-    alarm.frame = CGRectMake(0, top, self.view.frame.size.width, 50);
+    alarm.frame = CGRectMake(10, top, self.view.frame.size.width, 50);
     alarm.rightInset = 170;
     [self resizeScrollView];
 }
@@ -217,16 +249,21 @@ int scrollViewTag = 999;
         [self hideDeleteButton:alarmSwiped];
     }
     else {
+        UIColor *labelBG  = [UIColor colorWithRed:30/255.0f green:30/255.0f blue:30/255.0f alpha:1.0f];
+        
         [self hideDeleteButton:alarmSwiped];
         UIButton *button = (UIButton *)[alarmSwiped.view.subviews objectAtIndex: 0];
         _deleteDisplayedLabel = alarmSwiped.view;
+        
+        alarmSwiped.view.backgroundColor = labelBG;
     
         [UIView
             animateWithDuration:.25
             delay:0.0
             options:UIViewAnimationOptionAllowUserInteraction
             animations:^{
-                    button.frame = CGRectMake(screenWidth-50, 5, 40.0, 40.0);
+//                    button.frame = CGRectMake(screenWidth-55, 10, 30.0, 30.0);
+                    button.frame = CGRectMake(screenWidth - 40, 10, 30.0, 30.0);
                 }
             completion:^(BOOL finished){
                     //              [label removeFromSuperview];
@@ -235,15 +272,18 @@ int scrollViewTag = 999;
     }
 }
 
-- (IBAction)hideDeleteButton:(UIGestureRecognizer *)view{
+- (IBAction)hideDeleteButton:(UIGestureRecognizer *)alarmSwiped{
     if(_deleteDisplayedLabel != Nil) {
         UIButton *button = (UIButton *)[_deleteDisplayedLabel.subviews objectAtIndex: 0];
+        
+        _deleteDisplayedLabel.backgroundColor = bgColor;
+        
         [UIView
             animateWithDuration:.25
             delay:0.0
             options:UIViewAnimationOptionAllowUserInteraction
             animations:^{
-                    button.frame = CGRectMake(screenWidth-50, 5, 0, 40.0);
+                button.frame = CGRectMake(screenWidth - 40, 10, 0, 30.0);
             }
             completion:^(BOOL finished){
                 //              [label removeFromSuperview];

@@ -9,10 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface NewAlarmModalViewController : UIViewController
-- (IBAction)CloseSaveAlarmModal:(UIButton *)sender;
-- (IBAction)SaveNewAlarm:(UIButton *)sender;
-
 @property(nonatomic, weak) NSString *currentTime;
-
 
 @end

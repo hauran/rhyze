@@ -10,6 +10,7 @@
 #import "UIBorderLabel.h"
 #import "ALRMViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "NSString+FontAwesome.m"
 
 @interface NewAlarmModalViewController ()
 
@@ -29,11 +30,15 @@
 	UILabel *_crossLabel;
 }
 
-UIColor *bgColor_purple;
+UIColor *bgColor_modal;
 UIColor *bgColor_black;
+UIColor *textColor;
 int panDirection;
 NSString *newAlarmTime;
 UIBorderLabel *newAlarmLabel;
+CGRect screenBound;
+CGFloat screenWidth;
+CGFloat screenHeight;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -57,21 +62,34 @@ UIBorderLabel *newAlarmLabel;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    bgColor_purple = [UIColor colorWithRed:30/255.0f green:30/255.0f blue:30/255.0f alpha:1.0f];
-    self.view.backgroundColor = bgColor_purple;
     // Do any additional setup after loading the view from its nib.
+
+    textColor = [UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0f];
+    bgColor_modal = [UIColor colorWithRed:30/255.0f green:30/255.0f blue:30/255.0f alpha:1.0f];
+    screenBound = [[UIScreen mainScreen] bounds];
+    screenWidth = screenBound.size.width;
+    screenHeight = screenBound.size.height;
+    
+    self.view.backgroundColor = bgColor_modal;
+    
+    UILabel *titleLabel = [[UILabel alloc] init];
+    [titleLabel setBackgroundColor:bgColor_modal];
+    [titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:30.0f]];
+    titleLabel.textColor = textColor;
+    titleLabel.text = @"Create New Alarm";
+    titleLabel.frame = CGRectMake(10, 10, screenWidth-10, 50);
+    [[self view] addSubview:titleLabel];
     
     
-    
-    newAlarmLabel = [[UIBorderLabel alloc]initWithFrame:CGRectMake(10, 150, 290, 50)];
+    newAlarmLabel = [[UIBorderLabel alloc]initWithFrame:CGRectMake(10, 150, screenWidth - 20, 60)];
     bgColor_black = [UIColor colorWithRed:0/255.0f green:0/255.0f blue:0/255.0f alpha:1.0f];
     [newAlarmLabel setBackgroundColor:bgColor_black];
-    newAlarmLabel.layer.cornerRadius = 10;
+//    newAlarmLabel.layer.cornerRadius = 10;
     newAlarmLabel.leftInset = 15;
         
     [newAlarmLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:25.0f]];
     
-    newAlarmLabel.textColor = [UIColor colorWithRed:150/255.0f green:120/255.0f blue:155/255.0f alpha:1.0f];
+    newAlarmLabel.textColor = [UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0f];
         
     newAlarmLabel.text = self.currentTime;
     newAlarmTime = newAlarmLabel.text;
@@ -81,6 +99,41 @@ UIBorderLabel *newAlarmLabel;
     [newAlarmLabel addGestureRecognizer:recognizer];
     
     [[self view] addSubview:newAlarmLabel];
+    
+    
+    UIButton *newAlarmButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    newAlarmButton.backgroundColor = [UIColor clearColor];
+    newAlarmButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:25.f];
+    [newAlarmButton setTitleColor:textColor forState:UIControlStateNormal];
+    [newAlarmButton setTitle:[NSString fontAwesomeIconStringForIconIdentifier:@"icon-remove-sign"] forState: UIControlStateNormal];
+    newAlarmButton.frame = CGRectMake(screenWidth-35, 10, 40.0, 40.0);
+    
+    UITapGestureRecognizer *closeAlarmModal = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(closeModal:)];
+    closeAlarmModal.numberOfTapsRequired = 1;
+    [newAlarmButton setUserInteractionEnabled:YES];
+    [newAlarmButton addGestureRecognizer:closeAlarmModal];
+    
+    [self.view addSubview:newAlarmButton];
+    
+    
+    
+    UIButton *saveAlarmButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    saveAlarmButton.backgroundColor = bgColor_black;
+//    saveAlarmButton.layer.cornerRadius = 10;
+    saveAlarmButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:30.f];
+    [saveAlarmButton setTitleColor:textColor forState:UIControlStateNormal];
+    
+    NSString *btnText = [NSString stringWithFormat:@"%@%@", [NSString fontAwesomeIconStringForIconIdentifier:@"icon-bell"], @"  Save"];
+
+    [saveAlarmButton setTitle: btnText forState: UIControlStateNormal];
+    saveAlarmButton.frame = CGRectMake(10, screenHeight - 90, screenWidth - 20, 60.0);
+    
+    UITapGestureRecognizer *SaveNewAlarm = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(SaveNewAlarm:)];
+    SaveNewAlarm.numberOfTapsRequired = 1;
+    [saveAlarmButton setUserInteractionEnabled:YES];
+    [saveAlarmButton addGestureRecognizer:SaveNewAlarm];
+    
+    [self.view addSubview:saveAlarmButton];
     
 }
 
@@ -207,7 +260,7 @@ UIBorderLabel *newAlarmLabel;
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)CloseSaveAlarmModal:(UIButton *)sender {
+- (IBAction)closeModal:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

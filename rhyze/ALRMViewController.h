@@ -7,7 +7,6 @@
 #import <UIKit/UIKit.h>
 #import "NewAlarmModalViewController.h"
 #import "UIBorderLabel.h"
-#import "NSString+FontAwesome.h"
 
 
 @interface ALRMViewController : UIViewController
