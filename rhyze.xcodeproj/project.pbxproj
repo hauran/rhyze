@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		C500E2041770353600BBAFA4 /* UIBorderLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C500E2031770353600BBAFA4 /* UIBorderLabel.m */; };
+		C506B6ED1794C5E000087032 /* AlarmGoingOffViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C506B6EB1794C5E000087032 /* AlarmGoingOffViewController.m */; };
+		C506B6EE1794C5E000087032 /* AlarmGoingOffViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C506B6EC1794C5E000087032 /* AlarmGoingOffViewController.xib */; };
+		C506B6F21794EDE300087032 /* Alarm.m in Sources */ = {isa = PBXBuildFile; fileRef = C506B6F11794EDE300087032 /* Alarm.m */; };
 		C5413E52177D146F008D648E /* NewAlarmModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5413E50177D146F008D648E /* NewAlarmModalViewController.m */; };
 		C5413E53177D146F008D648E /* NewAlarmModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5413E51177D146F008D648E /* NewAlarmModalViewController.xib */; };
 		C57E9D7C178E6E9E00F436E0 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C57E9D7B178E6E9E00F436E0 /* FontAwesome.ttf */; };
@@ -33,6 +36,11 @@
 /* Begin PBXFileReference section */
 		C500E2021770353600BBAFA4 /* UIBorderLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBorderLabel.h; sourceTree = "<group>"; };
 		C500E2031770353600BBAFA4 /* UIBorderLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBorderLabel.m; sourceTree = "<group>"; };
+		C506B6EA1794C5E000087032 /* AlarmGoingOffViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlarmGoingOffViewController.h; sourceTree = "<group>"; };
+		C506B6EB1794C5E000087032 /* AlarmGoingOffViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlarmGoingOffViewController.m; sourceTree = "<group>"; };
+		C506B6EC1794C5E000087032 /* AlarmGoingOffViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlarmGoingOffViewController.xib; sourceTree = "<group>"; };
+		C506B6F01794EDE300087032 /* Alarm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alarm.h; sourceTree = "<group>"; };
+		C506B6F11794EDE300087032 /* Alarm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Alarm.m; sourceTree = "<group>"; };
 		C5413E4F177D146F008D648E /* NewAlarmModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewAlarmModalViewController.h; sourceTree = "<group>"; };
 		C5413E50177D146F008D648E /* NewAlarmModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewAlarmModalViewController.m; sourceTree = "<group>"; };
 		C5413E51177D146F008D648E /* NewAlarmModalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewAlarmModalViewController.xib; sourceTree = "<group>"; };
@@ -78,6 +86,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C506B6EF1794C5F700087032 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				C5413E4F177D146F008D648E /* NewAlarmModalViewController.h */,
+				C5413E50177D146F008D648E /* NewAlarmModalViewController.m */,
+				C5413E51177D146F008D648E /* NewAlarmModalViewController.xib */,
+				C506B6EA1794C5E000087032 /* AlarmGoingOffViewController.h */,
+				C506B6EB1794C5E000087032 /* AlarmGoingOffViewController.m */,
+				C506B6EC1794C5E000087032 /* AlarmGoingOffViewController.xib */,
+			);
+			name = SubViews;
+			sourceTree = "<group>";
+		};
 		C58CB160176968A900240A04 = {
 			isa = PBXGroup;
 			children = (
@@ -111,17 +132,17 @@
 		C58CB172176968A900240A04 /* rhyze */ = {
 			isa = PBXGroup;
 			children = (
+				C506B6EF1794C5F700087032 /* SubViews */,
 				C58CB17B176968A900240A04 /* ALRMAppDelegate.h */,
 				C58CB17C176968A900240A04 /* ALRMAppDelegate.m */,
 				C58CB184176968A900240A04 /* MainStoryboard.storyboard */,
 				C58CB187176968A900240A04 /* ALRMViewController.h */,
+				C506B6F01794EDE300087032 /* Alarm.h */,
+				C506B6F11794EDE300087032 /* Alarm.m */,
 				C58CB188176968A900240A04 /* ALRMViewController.m */,
 				C58CB173176968A900240A04 /* Supporting Files */,
 				C500E2021770353600BBAFA4 /* UIBorderLabel.h */,
 				C500E2031770353600BBAFA4 /* UIBorderLabel.m */,
-				C5413E4F177D146F008D648E /* NewAlarmModalViewController.h */,
-				C5413E50177D146F008D648E /* NewAlarmModalViewController.m */,
-				C5413E51177D146F008D648E /* NewAlarmModalViewController.xib */,
 			);
 			path = rhyze;
 			sourceTree = "<group>";
@@ -212,6 +233,7 @@
 				C57E9D8A178E6FC200F436E0 /* closeOver.png in Resources */,
 				C57E9D8B178E6FC200F436E0 /* save.png in Resources */,
 				C57E9D8C178E6FC200F436E0 /* saveOver.png in Resources */,
+				C506B6EE1794C5E000087032 /* AlarmGoingOffViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +249,8 @@
 				C58CB189176968A900240A04 /* ALRMViewController.m in Sources */,
 				C500E2041770353600BBAFA4 /* UIBorderLabel.m in Sources */,
 				C5413E52177D146F008D648E /* NewAlarmModalViewController.m in Sources */,
+				C506B6ED1794C5E000087032 /* AlarmGoingOffViewController.m in Sources */,
+				C506B6F21794EDE300087032 /* Alarm.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

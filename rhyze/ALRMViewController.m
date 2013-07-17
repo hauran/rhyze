@@ -9,8 +9,10 @@
 #import "ALRMViewController.h"
 #import "UIBorderLabel.h"
 #import "NewAlarmModalViewController.h"
+#import "AlarmGoingOffViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "NSString+FontAwesome.m"
+#import "Alarm.h"
 @interface ALRMViewController ()
 
 @end
@@ -24,7 +26,6 @@
 UIColor *bgColor;
 UIColor *textColor;
 NSMutableArray *alarmArray;
-NSString *alarmCacheFilename;
 UIScrollView *scrollView;
 CGRect screenBound;
 CGFloat screenWidth;
@@ -39,17 +40,57 @@ int scrollViewTag = 999;
     [self presentViewController:newAlarm animated:YES completion:nil];
 }
 
-- (void) saveAlarmClick: (NSString *)newAlarmTime {    
-    [self newAlarm:newAlarmTime];
-    UIBorderLabel *label = [alarmArray objectAtIndex:[alarmArray count]-1];
-    NSLog(@"%@ %d", label, [alarmArray count]-1);
-    [self displaySavedAlarm:label index:[alarmArray count]-1];
+- (void) alarmGoingOffModal {
+    AlarmGoingOffViewController *alarmGoingOffModal = [[AlarmGoingOffViewController alloc] init];
+//    newAlarm.currentTime = _currentTime.text;
+    alarmGoingOffModal.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentViewController:alarmGoingOffModal animated:YES completion:nil];
 }
 
+- (void) saveAlarmClick: (NSString *)newAlarmTime {    
+    Alarm *alarm  = [self newAlarm:newAlarmTime];
+    [self displaySavedAlarm:alarm.time index:[alarmArray count]-1];
+}
+
+
+-(Alarm *) newAlarm:(NSString *)time {
+    Alarm *newAlarm = [[Alarm alloc] init];
+    NSMutableDictionary  *alarmDictionary= [[NSMutableDictionary alloc] init];
+    [alarmDictionary setObject:time forKey:@"time"];
+    
+    newAlarm.time = time;
+    newAlarm.alarmDictionary = alarmDictionary;
+    [alarmArray addObject:newAlarm.alarmDictionary];
+    
+    [self saveAlarmArray];
+    
+    NSDate *date = [self timeStringToDate:time];
+    UILocalNotification*notification = [[UILocalNotification alloc] init];
+    
+    notification.fireDate = date;
+    notification.timeZone = [NSTimeZone defaultTimeZone];
+    notification.timeZone = [NSTimeZone defaultTimeZone];
+    notification.alertBody = @"Alarm is ringing.";
+    notification.alertAction = @"Snooze";
+    notification.repeatInterval = 0;
+    //    Settings *settings = [Settings sharedSettings];
+    //    notification.soundName = [settings fileNameForSound:settings.soundIndex];
+    notification.soundName = UILocalNotificationDefaultSoundName;
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    
+    return newAlarm;
+}
+
+
 -(void) saveAlarmArray {
-    NSError  *error;
-    NSData* archiveData = [NSKeyedArchiver archivedDataWithRootObject:alarmArray];
-    [archiveData writeToFile:alarmCacheFilename options:NSDataWritingAtomic error:&error];
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *arrayOfDictionaries = [[NSMutableArray alloc] init];
+    
+    for (Alarm *alarm in alarmArray) {
+        [arrayOfDictionaries addObject:alarm];
+    }
+    [prefs setObject:arrayOfDictionaries forKey:@"geniotAlarm"];
+    [prefs synchronize];
 }
 
 - (NSString *)dateToTime: (NSDate *)date{
@@ -61,6 +102,22 @@ int scrollViewTag = 999;
     return [[timeFormatter stringFromDate:date] lowercaseString];
 }
 
+
+- (NSDate *)timeStringToDate: (NSString *)time{
+    NSMutableString *dateString = [[NSMutableString alloc] init];
+    
+    NSDate *currDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    
+    [dateString appendFormat:@"%@ %@",[NSMutableString stringWithString:[dateFormatter stringFromDate:currDate]], time];
+    
+    NSDateFormatter *currentAlarmFormat = [[NSDateFormatter alloc] init];
+    [currentAlarmFormat setDateFormat:@"MMM dd, yyyy hh:mm a"];
+    return [currentAlarmFormat dateFromString:dateString];
+}
 
 - (NSString *)currentTime {
     NSDate *currDate = [NSDate date];
@@ -85,97 +142,43 @@ int scrollViewTag = 999;
     
     _currentTime.text = (NSString *)[self currentTime];
     _currentDate.text = dateString;
+    
+//    if ([alarmArray containsObject:[NSNumber numberWithInt:516]])
+//        NSLog(@"WIN");
+    
     [self performSelector:@selector(updateTime) withObject:self afterDelay:1.0];
 }
 
-- (void)viewDidLoad
-{
-        [super viewDidLoad];
-        // Do any additional setup after loading the view, typically from a nib.
-        bgColor = [UIColor colorWithRed:0/255.0f green:0/255.0f blue:0/255.0f alpha:1.0f];
-        self.view.backgroundColor = bgColor;
-    
-        scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.height-100)];
 
-        
-        screenBound = [[UIScreen mainScreen] bounds];
-        screenWidth = screenBound.size.width;
-    
-        [self updateTime];
-        [self loadSavedAlarms];
-        
-        UITapGestureRecognizer *hideDeleteButton = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideDeleteButton:)];
-        hideDeleteButton.numberOfTapsRequired = 1;
-        [self.view setUserInteractionEnabled:YES];
-        [self.view addGestureRecognizer:hideDeleteButton];
-        
-        UITapGestureRecognizer *hideDeleteButton2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideDeleteButton:)];
-        hideDeleteButton2.numberOfTapsRequired = 1;
-        [scrollView addGestureRecognizer:hideDeleteButton2];
-        [self.view addSubview:scrollView];
-    
-        textColor = [UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0f];
-    
-        _currentTime.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:40.f];
-        _currentTime.textColor = textColor;
-    
-        _currentDate.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:19.f];
-        _currentDate.textColor = textColor;
-    
-    
-        UIButton *newAlarmButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        newAlarmButton.backgroundColor = [UIColor clearColor];
-        newAlarmButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:25.f];
-        [newAlarmButton setTitleColor:textColor forState:UIControlStateNormal];
-        [newAlarmButton setTitle:[NSString fontAwesomeIconStringForIconIdentifier:@"icon-plus-sign"] forState: UIControlStateNormal];
-        newAlarmButton.frame = CGRectMake(screenWidth-35, 10, 40.0, 40.0);
-    
-        UITapGestureRecognizer *newAlarmModal = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showNewAlarmModal:)];
-        newAlarmModal.numberOfTapsRequired = 1;
-        [newAlarmButton setUserInteractionEnabled:YES];
-        [newAlarmButton addGestureRecognizer:newAlarmModal];
-        [self.view addSubview:newAlarmButton];
 
-    
-    NSArray *familyNames = [[NSArray alloc] initWithArray:[UIFont familyNames]];
-    NSArray *fontNames;
-    NSInteger indFamily, indFont;
-    for (indFamily=0; indFamily<[familyNames count]; ++indFamily)
-    {
-        NSLog(@"Family name: %@", [familyNames objectAtIndex:indFamily]);
-        fontNames = [[NSArray alloc] initWithArray:
-                     [UIFont fontNamesForFamilyName:
-                      [familyNames objectAtIndex:indFamily]]];
-        for (indFont=0; indFont<[fontNames count]; ++indFont)
-        {
-            NSLog(@"    Font name: %@", [fontNames objectAtIndex:indFont]);
-        }
-    }
-}
+
 
 - (void) loadSavedAlarms {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsPath = [paths objectAtIndex:0];
-    alarmCacheFilename = [documentsPath stringByAppendingPathComponent:@"geniotAlarm3.plist"];
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+//    NSMutableArray *arrayOfDictionaries = [[NSMutableArray alloc] init];
+//    
+//
+//    [prefs setObject:arrayOfDictionaries forKey:@"geniotAlarm"];
+//    [prefs synchronize];
     
-    NSData *archiveData = [NSData dataWithContentsOfFile:alarmCacheFilename];
-    alarmArray = (NSMutableArray*)[NSKeyedUnarchiver unarchiveObjectWithData:archiveData];
-
+    alarmArray = (NSMutableArray*)[prefs objectForKey:@"geniotAlarm"];
+    
     if (alarmArray == nil) {
         alarmArray = [[NSMutableArray alloc] init];
     }    
     
-    for (int i=0; i<[alarmArray count]; i++) {
-        [self displaySavedAlarm:[alarmArray objectAtIndex:i] index:i];
+    int i = 0;
+    for (Alarm *alarm in alarmArray) {
+        [self displaySavedAlarm:[alarm valueForKey:@"time"] index:i++];
     }
 }
 
--(void) newAlarm:(NSString *)time {
+-(UIBorderLabel *) createAlarmLabel:(NSString *)time {
     UIBorderLabel *newAlarmLabel = [[UIBorderLabel alloc] init];
     [newAlarmLabel setBackgroundColor:bgColor];
     
     [newAlarmLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:25.0f]];
-//    newAlarmLabel.layer.cornerRadius = 10;
+
     newAlarmLabel.textColor = textColor;
     newAlarmLabel.textAlignment = NSTextAlignmentRight;
     newAlarmLabel.text = time;
@@ -189,16 +192,14 @@ int scrollViewTag = 999;
     button.frame = CGRectMake(screenWidth - 40, 10, 0, 30.0);
     
     [newAlarmLabel addSubview:button];
-    
-    NSLog(@"%@",newAlarmLabel);
-    [alarmArray addObject:newAlarmLabel];
-    [self saveAlarmArray];
+    return newAlarmLabel;
 }
 
 
-- (void) displaySavedAlarm:(UIBorderLabel *) alarm index:(int) index{
+
+- (void) displaySavedAlarm:(NSString *)time index:(int) index{
     CGFloat top = (CGFloat)(50 * index);
-    [scrollView addSubview:alarm];
+    UIBorderLabel *alarmLabel = [self createAlarmLabel:time];
     
     UISwipeGestureRecognizer *showDeleteButton = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showDeleteButton:)];
     [showDeleteButton setDirection:(UISwipeGestureRecognizerDirectionRight | UISwipeGestureRecognizerDirectionLeft)];
@@ -206,19 +207,21 @@ int scrollViewTag = 999;
     UITapGestureRecognizer *editAlarm = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editAlarm:)];
     editAlarm.numberOfTapsRequired = 1;
     
-    [alarm setUserInteractionEnabled:YES];
-    [alarm addGestureRecognizer:editAlarm];
-    [alarm addGestureRecognizer:showDeleteButton];
+    [alarmLabel setUserInteractionEnabled:YES];
+    [alarmLabel addGestureRecognizer:editAlarm];
+    [alarmLabel addGestureRecognizer:showDeleteButton];
     
     UITapGestureRecognizer *deleteAlarm = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteAlarm:)];
     deleteAlarm.numberOfTapsRequired = 1;
 
-    UIButton *button = [[alarm subviews] objectAtIndex:0];
+    UIButton *button = [[alarmLabel subviews] objectAtIndex:0];
     [button setUserInteractionEnabled:YES];
     [button addGestureRecognizer:deleteAlarm];
     
-    alarm.frame = CGRectMake(10, top, self.view.frame.size.width, 50);
-    alarm.rightInset = 170;
+    alarmLabel.frame = CGRectMake(10, top, self.view.frame.size.width, 50);
+    alarmLabel.rightInset = 170;
+    [scrollView addSubview:alarmLabel];
+    
     [self resizeScrollView];
 }
 
@@ -227,6 +230,7 @@ int scrollViewTag = 999;
     CGFloat scrollViewHeight = 0.0f;
     for (UIView* view in scrollView.subviews)
     {
+        
         if([view isKindOfClass: [UIBorderLabel class]]){
             scrollViewHeight += view.frame.size.height;
         }
@@ -296,20 +300,22 @@ int scrollViewTag = 999;
 - (IBAction)deleteAlarm:(UIGestureRecognizer *)btn{
     int i;
     for(i=0; i < [alarmArray count]; i++) {
-        if([alarmArray objectAtIndex:i] ==  btn.view.superview){
+        NSMutableDictionary *alarm = [alarmArray objectAtIndex:i];
+        UIBorderLabel *label = (UIBorderLabel *)btn.view.superview;
+        if([(NSString *)[alarm valueForKey:@"time"]  isEqualToString:label.text]){
             break;
         }
     }
     
     UILabel *otherLabel;
-    for(int j=i+1; j < [alarmArray count]; j++) {
-        otherLabel = [alarmArray objectAtIndex:j];
+    for(int j=i+1; j < [scrollView.subviews count]; j++) {
+        otherLabel = [scrollView.subviews objectAtIndex:j];
         [UIView
          animateWithDuration:.5
          delay:0.1
          options:UIViewAnimationOptionAllowUserInteraction
          animations:^{
-             otherLabel.frame = CGRectMake(0, otherLabel.frame.origin.y - 50, self.view.frame.size.width, 50);
+             otherLabel.frame = CGRectMake(10, otherLabel.frame.origin.y - 50, self.view.frame.size.width, 50);
          }
          completion:^(BOOL finished){
              [self resizeScrollView];
@@ -321,6 +327,55 @@ int scrollViewTag = 999;
     [alarmArray removeObjectAtIndex:i];
     [self saveAlarmArray];
     _deleteDisplayedLabel = Nil;
+}
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view, typically from a nib.
+    bgColor = [UIColor colorWithRed:0/255.0f green:0/255.0f blue:0/255.0f alpha:1.0f];
+    self.view.backgroundColor = bgColor;
+    
+    textColor = [UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0f];
+
+    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.height-100)];
+    
+    screenBound = [[UIScreen mainScreen] bounds];
+    screenWidth = screenBound.size.width;
+    
+    [self updateTime];
+    [self loadSavedAlarms];
+    
+    UITapGestureRecognizer *hideDeleteButton = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideDeleteButton:)];
+    hideDeleteButton.numberOfTapsRequired = 1;
+    [self.view setUserInteractionEnabled:YES];
+    [self.view addGestureRecognizer:hideDeleteButton];
+    
+    UITapGestureRecognizer *hideDeleteButton2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideDeleteButton:)];
+    hideDeleteButton2.numberOfTapsRequired = 1;
+    [scrollView addGestureRecognizer:hideDeleteButton2];
+    [self.view addSubview:scrollView];
+        
+    _currentTime.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:40.f];
+    _currentTime.textColor = textColor;
+    
+    _currentDate.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:19.f];
+    _currentDate.textColor = textColor;
+    
+    
+    UIButton *newAlarmButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    newAlarmButton.backgroundColor = [UIColor clearColor];
+    newAlarmButton.titleLabel.font = [UIFont fontWithName:kFontAwesomeFamilyName size:25.f];
+    [newAlarmButton setTitleColor:textColor forState:UIControlStateNormal];
+    [newAlarmButton setTitle:[NSString fontAwesomeIconStringForIconIdentifier:@"icon-plus-sign"] forState: UIControlStateNormal];
+    newAlarmButton.frame = CGRectMake(screenWidth-35, 10, 40.0, 40.0);
+    
+    UITapGestureRecognizer *newAlarmModal = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showNewAlarmModal:)];
+    newAlarmModal.numberOfTapsRequired = 1;
+    [newAlarmButton setUserInteractionEnabled:YES];
+    [newAlarmButton addGestureRecognizer:newAlarmModal];
+    [self.view addSubview:newAlarmButton];
 }
 
 @end
