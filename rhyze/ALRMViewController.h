@@ -16,4 +16,5 @@
 @property UIView *deleteDisplayedLabel;
 
 - (void)saveAlarmClick:(NSString *)newAlarmTime;
+- (void)dismissAlarm;
 @end

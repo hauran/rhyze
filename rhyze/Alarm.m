@@ -13,6 +13,8 @@
 @synthesize time = _time;
 @synthesize daysRepeat = _daysRepeat;
 @synthesize soundFile = _soundFile;
+@synthesize dismissed = _dismissed;
 @synthesize alarmDictionary = _alarmDictionary;
+@synthesize alarmId = _alarmId;
 
 @end

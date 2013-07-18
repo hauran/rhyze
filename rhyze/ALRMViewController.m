@@ -26,11 +26,14 @@
 UIColor *bgColor;
 UIColor *textColor;
 NSMutableArray *alarmArray;
+NSMutableDictionary *alarmClassDictionary;
 UIScrollView *scrollView;
 CGRect screenBound;
 CGFloat screenWidth;
 int alarmIndex = 11;
 int scrollViewTag = 999;
+bool isAlarmGoingOff = false;
+Alarm *alarmGoingOff;
 
 
 - (IBAction)showNewAlarmModal:(UIGestureRecognizer *)newAlarmTapped{
@@ -38,6 +41,14 @@ int scrollViewTag = 999;
     newAlarm.currentTime = _currentTime.text;
     newAlarm.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self presentViewController:newAlarm animated:YES completion:nil];
+    
+//    [self alarmGoingOffModal];
+}
+
+
+-(void) dismissAlarm {
+    isAlarmGoingOff = false;
+    
 }
 
 - (void) alarmGoingOffModal {
@@ -45,6 +56,9 @@ int scrollViewTag = 999;
 //    newAlarm.currentTime = _currentTime.text;
     alarmGoingOffModal.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self presentViewController:alarmGoingOffModal animated:YES completion:nil];
+    
+    
+    isAlarmGoingOff = true;
 }
 
 - (void) saveAlarmClick: (NSString *)newAlarmTime {    
@@ -60,6 +74,8 @@ int scrollViewTag = 999;
     
     newAlarm.time = time;
     newAlarm.alarmDictionary = alarmDictionary;
+    newAlarm.dismissed = false;
+    newAlarm.alarmId = (float *)rand();
     [alarmArray addObject:newAlarm.alarmDictionary];
     
     [self saveAlarmArray];
@@ -143,8 +159,14 @@ int scrollViewTag = 999;
     _currentTime.text = (NSString *)[self currentTime];
     _currentDate.text = dateString;
     
-//    if ([alarmArray containsObject:[NSNumber numberWithInt:516]])
-//        NSLog(@"WIN");
+    if(!isAlarmGoingOff){
+        for(NSMutableDictionary *alarm in alarmArray){
+            if([(NSString *)[alarm valueForKey:@"time"] isEqualToString:_currentTime.text]){
+                NSLog(@"GO OFF");
+                [self alarmGoingOffModal];
+            }
+        }
+    }
     
     [self performSelector:@selector(updateTime) withObject:self afterDelay:1.0];
 }
@@ -168,9 +190,20 @@ int scrollViewTag = 999;
     }    
     
     int i = 0;
-    for (Alarm *alarm in alarmArray) {
+    for (NSMutableDictionary *alarm in alarmArray) {
+        [self createAlarmClassFromDictionary: alarm];
         [self displaySavedAlarm:[alarm valueForKey:@"time"] index:i++];
     }
+}
+
+
+-(void) createAlarmClassFromDictionary:(NSMutableDictionary *)alarmDictionary{
+    Alarm *alarm = [[Alarm alloc] init];
+    alarm.dismissed = false;
+    alarm.time = [alarmDictionary valueForKey:@"time"];
+    alarm.alarmId = (float *)rand();
+    alarm.alarmDictionary = alarmDictionary;
+    [alarmClassDictionary setObject:alarm forKey:alarm.time];
 }
 
 -(UIBorderLabel *) createAlarmLabel:(NSString *)time {
@@ -181,7 +214,7 @@ int scrollViewTag = 999;
 
     newAlarmLabel.textColor = textColor;
     newAlarmLabel.textAlignment = NSTextAlignmentRight;
-    newAlarmLabel.text = time;
+    newAlarmLabel.text = [time lowercaseString];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.backgroundColor = [UIColor clearColor];
@@ -302,7 +335,7 @@ int scrollViewTag = 999;
     for(i=0; i < [alarmArray count]; i++) {
         NSMutableDictionary *alarm = [alarmArray objectAtIndex:i];
         UIBorderLabel *label = (UIBorderLabel *)btn.view.superview;
-        if([(NSString *)[alarm valueForKey:@"time"]  isEqualToString:label.text]){
+        if([[(NSString *)[alarm valueForKey:@"time"] lowercaseString]  isEqualToString:label.text]){
             break;
         }
     }
@@ -344,6 +377,8 @@ int scrollViewTag = 999;
     screenBound = [[UIScreen mainScreen] bounds];
     screenWidth = screenBound.size.width;
     
+    alarmClassDictionary = [[NSMutableDictionary alloc] init];
+    
     [self updateTime];
     [self loadSavedAlarms];
     
@@ -376,6 +411,7 @@ int scrollViewTag = 999;
     [newAlarmButton setUserInteractionEnabled:YES];
     [newAlarmButton addGestureRecognizer:newAlarmModal];
     [self.view addSubview:newAlarmButton];
+    
 }
 
 @end

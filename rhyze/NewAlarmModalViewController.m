@@ -56,7 +56,7 @@ CGFloat screenHeight;
     [timeFormatter setDateStyle:NSDateFormatterNoStyle];
     [timeFormatter setTimeStyle:NSDateFormatterShortStyle];
 
-    return[timeFormatter stringFromDate:date];
+    return [[timeFormatter stringFromDate:date] lowercaseString];
 }
 
 - (void)viewDidLoad
