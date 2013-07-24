@@ -9,7 +9,6 @@
 #import "ALRMViewController.h"
 #import "UIBorderLabel.h"
 #import "NewAlarmModalViewController.h"
-#import "AlarmGoingOffViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "NSString+FontAwesome.m"
 #import "Alarm.h"
@@ -25,15 +24,14 @@
 
 UIColor *bgColor;
 UIColor *textColor;
-NSMutableArray *alarmArray;
+//NSMutableArray *alarmArray;
 NSMutableDictionary *alarmClassDictionary;
+NSMutableDictionary *alarmDictionary;
 UIScrollView *scrollView;
 CGRect screenBound;
 CGFloat screenWidth;
 int alarmIndex = 11;
 int scrollViewTag = 999;
-bool isAlarmGoingOff = false;
-Alarm *alarmGoingOff;
 
 
 - (IBAction)showNewAlarmModal:(UIGestureRecognizer *)newAlarmTapped{
@@ -47,38 +45,34 @@ Alarm *alarmGoingOff;
 
 
 -(void) dismissAlarm {
-    isAlarmGoingOff = false;
-    
 }
 
-- (void) alarmGoingOffModal {
-    AlarmGoingOffViewController *alarmGoingOffModal = [[AlarmGoingOffViewController alloc] init];
-//    newAlarm.currentTime = _currentTime.text;
-    alarmGoingOffModal.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentViewController:alarmGoingOffModal animated:YES completion:nil];
-    
-    
-    isAlarmGoingOff = true;
-}
 
 - (void) saveAlarmClick: (NSString *)newAlarmTime {    
     Alarm *alarm  = [self newAlarm:newAlarmTime];
-    [self displaySavedAlarm:alarm.time index:[alarmArray count]-1];
+    [self displaySavedAlarm:alarm.time index:[[alarmDictionary allKeys] count]-1];
 }
 
 
 -(Alarm *) newAlarm:(NSString *)time {
     Alarm *newAlarm = [[Alarm alloc] init];
-    NSMutableDictionary  *alarmDictionary= [[NSMutableDictionary alloc] init];
-    [alarmDictionary setObject:time forKey:@"time"];
+    NSMutableDictionary  *newAlarmDictionary= [[NSMutableDictionary alloc] init];
     
-    newAlarm.time = time;
-    newAlarm.alarmDictionary = alarmDictionary;
-    newAlarm.dismissed = false;
-    newAlarm.alarmId = (float *)rand();
-    [alarmArray addObject:newAlarm.alarmDictionary];
+    [newAlarmDictionary setObject:time forKey:@"time"];
+    [newAlarmDictionary setObject:[NSNumber numberWithInteger:0] forKey:@"skip"];
+    [newAlarmDictionary setObject:@"ring.aiff" forKey:@"soundFile"];
+    [alarmDictionary setObject:newAlarmDictionary forKey:time];
     
-    [self saveAlarmArray];
+    newAlarm = [self createAlarmClassFromDictionary:newAlarmDictionary];
+//    newAlarm.time = time;
+//    newAlarm.alarmDictionary = newAlarmDictionary;
+//    newAlarm.dismissed = false;
+//    newAlarm.soundFile = @"ring.mp3";
+//    newAlarm.alarmId = (float *)rand();
+    
+    [alarmClassDictionary setObject:[self createAlarmClassFromDictionary:newAlarmDictionary] forKey:time];
+    
+    [self saveAlarms];
     
     NSDate *date = [self timeStringToDate:time];
     UILocalNotification*notification = [[UILocalNotification alloc] init];
@@ -88,24 +82,22 @@ Alarm *alarmGoingOff;
     notification.timeZone = [NSTimeZone defaultTimeZone];
     notification.alertBody = @"Alarm is ringing.";
     notification.alertAction = @"Snooze";
+    notification.userInfo = newAlarmDictionary;
     notification.repeatInterval = 0;
+    
     //    Settings *settings = [Settings sharedSettings];
-    //    notification.soundName = [settings fileNameForSound:settings.soundIndex];
-    notification.soundName = UILocalNotificationDefaultSoundName;
+    notification.soundName = newAlarm.soundFile;
+    
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
     
     return newAlarm;
 }
 
 
--(void) saveAlarmArray {
+-(void) saveAlarms {
+    NSLog(@"%@", alarmDictionary);
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *arrayOfDictionaries = [[NSMutableArray alloc] init];
-    
-    for (Alarm *alarm in alarmArray) {
-        [arrayOfDictionaries addObject:alarm];
-    }
-    [prefs setObject:arrayOfDictionaries forKey:@"geniotAlarm"];
+    [prefs setObject:alarmDictionary forKey:@"geniotAlarm"];
     [prefs synchronize];
 }
 
@@ -135,6 +127,7 @@ Alarm *alarmGoingOff;
     return [currentAlarmFormat dateFromString:dateString];
 }
 
+
 - (NSString *)currentTime {
     NSDate *currDate = [NSDate date];
     return [self dateToTime:currDate];
@@ -159,15 +152,6 @@ Alarm *alarmGoingOff;
     _currentTime.text = (NSString *)[self currentTime];
     _currentDate.text = dateString;
     
-    if(!isAlarmGoingOff){
-        for(NSMutableDictionary *alarm in alarmArray){
-            if([(NSString *)[alarm valueForKey:@"time"] isEqualToString:_currentTime.text]){
-                NSLog(@"GO OFF");
-                [self alarmGoingOffModal];
-            }
-        }
-    }
-    
     [self performSelector:@selector(updateTime) withObject:self afterDelay:1.0];
 }
 
@@ -177,33 +161,40 @@ Alarm *alarmGoingOff;
 
 - (void) loadSavedAlarms {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-//    NSMutableArray *arrayOfDictionaries = [[NSMutableArray alloc] init];
+    NSMutableDictionary *alarmPreferenceDictionary = [[NSMutableDictionary alloc] init];
 //    
 //
 //    [prefs setObject:arrayOfDictionaries forKey:@"geniotAlarm"];
 //    [prefs synchronize];
     
-    alarmArray = (NSMutableArray*)[prefs objectForKey:@"geniotAlarm"];
+    NSArray *alarmPreferences = [prefs objectForKey:@"geniotAlarm"];
     
-    if (alarmArray == nil) {
-        alarmArray = [[NSMutableArray alloc] init];
-    }    
+    if (alarmPreferences == nil || [alarmPreferences count] == 0) {
+        alarmPreferenceDictionary = [[NSMutableDictionary alloc] init];
+        alarmDictionary = [[NSMutableDictionary alloc] init];
+    }
+    else {
+        alarmPreferenceDictionary = [alarmPreferences copy];
+        alarmDictionary = [alarmPreferences mutableCopy];
+    }
     
     int i = 0;
-    for (NSMutableDictionary *alarm in alarmArray) {
-        [self createAlarmClassFromDictionary: alarm];
-        [self displaySavedAlarm:[alarm valueForKey:@"time"] index:i++];
+    for(id time in alarmPreferenceDictionary) {
+        [self displaySavedAlarm:time index:i++];
+        [self createAlarmClassFromDictionary: [alarmPreferenceDictionary objectForKey:time]];
     }
 }
 
 
--(void) createAlarmClassFromDictionary:(NSMutableDictionary *)alarmDictionary{
+-(Alarm *) createAlarmClassFromDictionary:(NSMutableDictionary *)alarmDictionary{
     Alarm *alarm = [[Alarm alloc] init];
     alarm.dismissed = false;
     alarm.time = [alarmDictionary valueForKey:@"time"];
+    alarm.soundFile = [alarmDictionary valueForKey:@"soundFile"];
     alarm.alarmId = (float *)rand();
     alarm.alarmDictionary = alarmDictionary;
     [alarmClassDictionary setObject:alarm forKey:alarm.time];
+    return alarm;
 }
 
 -(UIBorderLabel *) createAlarmLabel:(NSString *)time {
@@ -331,34 +322,38 @@ Alarm *alarmGoingOff;
 }
 
 - (IBAction)deleteAlarm:(UIGestureRecognizer *)btn{
-    int i;
-    for(i=0; i < [alarmArray count]; i++) {
-        NSMutableDictionary *alarm = [alarmArray objectAtIndex:i];
-        UIBorderLabel *label = (UIBorderLabel *)btn.view.superview;
-        if([[(NSString *)[alarm valueForKey:@"time"] lowercaseString]  isEqualToString:label.text]){
+    int i = 0;
+    UIBorderLabel *label = (UIBorderLabel *)btn.view.superview;
+    for(id time in alarmDictionary) {
+        //[self displaySavedAlarm:time index:i++];
+        if([(NSString *)time isEqualToString:label.text]){
             break;
         }
     }
     
+    
     UILabel *otherLabel;
     for(int j=i+1; j < [scrollView.subviews count]; j++) {
         otherLabel = [scrollView.subviews objectAtIndex:j];
-        [UIView
-         animateWithDuration:.5
-         delay:0.1
-         options:UIViewAnimationOptionAllowUserInteraction
-         animations:^{
-             otherLabel.frame = CGRectMake(10, otherLabel.frame.origin.y - 50, self.view.frame.size.width, 50);
-         }
-         completion:^(BOOL finished){
-             [self resizeScrollView];
-         }
+        if([otherLabel isKindOfClass:[UIBorderLabel class]]) {
+            [UIView
+             animateWithDuration:.5
+             delay:0.1
+             options:UIViewAnimationOptionAllowUserInteraction
+             animations:^{
+                 otherLabel.frame = CGRectMake(10, otherLabel.frame.origin.y - 50, self.view.frame.size.width, 50);
+             }
+             completion:^(BOOL finished){
+                [self resizeScrollView];
+             }
          ];
+        }
     }
     [btn.view.superview removeFromSuperview];
     [self resizeScrollView];
-    [alarmArray removeObjectAtIndex:i];
-    [self saveAlarmArray];
+    [alarmClassDictionary removeObjectForKey:label.text];
+    [alarmDictionary removeObjectForKey:label.text];
+    [self saveAlarms];
     _deleteDisplayedLabel = Nil;
 }
 
@@ -369,17 +364,13 @@ Alarm *alarmGoingOff;
     // Do any additional setup after loading the view, typically from a nib.
     bgColor = [UIColor colorWithRed:0/255.0f green:0/255.0f blue:0/255.0f alpha:1.0f];
     self.view.backgroundColor = bgColor;
-    
     textColor = [UIColor colorWithRed:255/255.0f green:255/255.0f blue:255/255.0f alpha:1.0f];
-
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.height-100)];
-    
     screenBound = [[UIScreen mainScreen] bounds];
     screenWidth = screenBound.size.width;
     
     alarmClassDictionary = [[NSMutableDictionary alloc] init];
     
-    [self updateTime];
     [self loadSavedAlarms];
     
     UITapGestureRecognizer *hideDeleteButton = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideDeleteButton:)];
@@ -411,6 +402,8 @@ Alarm *alarmGoingOff;
     [newAlarmButton setUserInteractionEnabled:YES];
     [newAlarmButton addGestureRecognizer:newAlarmModal];
     [self.view addSubview:newAlarmButton];
+    
+    [self updateTime];
     
 }
 

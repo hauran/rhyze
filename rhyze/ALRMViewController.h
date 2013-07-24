@@ -5,11 +5,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 #import "NewAlarmModalViewController.h"
 #import "UIBorderLabel.h"
 
 
-@interface ALRMViewController : UIViewController
+@interface ALRMViewController : UIViewController {
+    AVAudioPlayer *audioPlayer;
+}
+
 @property (weak, nonatomic) IBOutlet UILabel *currentTime;
 @property (weak, nonatomic) IBOutlet UILabel *currentDate;
 

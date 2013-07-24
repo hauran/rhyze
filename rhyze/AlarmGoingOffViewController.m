@@ -11,6 +11,7 @@
 #import "ALRMViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "NSString+FontAwesome.m"
+#import <AVFoundation/AVFoundation.h>
 
 @interface AlarmGoingOffViewController ()
 
@@ -21,6 +22,7 @@ UIColor *textColor_black;
 CGRect screenBound;
 CGFloat screenWidth;
 CGFloat screenHeight;
+AVAudioPlayer *audioPlayer;
 
 @implementation AlarmGoingOffViewController
 
@@ -61,13 +63,31 @@ CGFloat screenHeight;
     [saveAlarmButton addGestureRecognizer:SaveNewAlarm];
     
     [self.view addSubview:saveAlarmButton];
-
+    
+    
+//    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"ring" ofType:@"mp3"];
+//    // Convert the file path to a URL.
+//    NSURL *fileURL = [[NSURL alloc] initFileURLWithPath:filePath];
+//    audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:nil];
+//    audioPlayer.numberOfLoops = 5;
+//    [audioPlayer play];
 }
 
 
 - (IBAction)DismissAlarm:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
     [(ALRMViewController *)self.presentingViewController dismissAlarm];
+    [self audioFadeOut];
+}
+
+-(void) audioFadeOut {
+    if (self.audioPlayer.volume > 0.0) {
+        self.audioPlayer.volume = audioPlayer.volume - 0.1;
+        [self performSelector:@selector(audioFadeOut) withObject:nil afterDelay:0.2];
+    }
+    else {
+        [self.audioPlayer stop];
+    }
 }
 
 - (void)didReceiveMemoryWarning

@@ -7,15 +7,28 @@
 //
 
 #import "ALRMAppDelegate.h"
+#import "AlarmGoingOffViewController.h"
+#import <AVFoundation/AVFoundation.h>
+
+@interface ALRMAppDelegate ()
+
+@end
 
 @implementation ALRMAppDelegate
+AVAudioPlayer *audioPlayer;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     return YES;
 }
-							
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+
+}
+
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -43,4 +56,27 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notif {    
+//    Runs when alarm goes off an app is in foreground running
+    AlarmGoingOffViewController *alarmGoingOffModal = [[AlarmGoingOffViewController alloc] init];
+    
+    if (application.applicationState == UIApplicationStateInactive ) {
+        //The application received the notification from an inactive state, i.e. the user tapped the "View" button for the alert.
+        //If the visible view controller in your view controller stack isn't the one you need then show the right one.
+    }
+    
+    if(application.applicationState == UIApplicationStateActive ) {
+        //The application received a notification in the active state, so you can display an alert view or do something appropriate.
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"ring" ofType:@"aiff"];
+        NSURL *fileURL = [[NSURL alloc] initFileURLWithPath:filePath];
+        audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:nil];
+        audioPlayer.numberOfLoops = 5;
+        [audioPlayer play];
+        alarmGoingOffModal.audioPlayer = audioPlayer;
+    }
+    
+    
+    alarmGoingOffModal.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self.window.rootViewController presentViewController:alarmGoingOffModal animated:YES completion:nil];
+}
 @end

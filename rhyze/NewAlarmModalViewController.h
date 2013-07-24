@@ -9,6 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface NewAlarmModalViewController : UIViewController
-@property(nonatomic, weak) NSString *currentTime;
-
+@property (strong, nonatomic) NSString  *currentTime;
 @end

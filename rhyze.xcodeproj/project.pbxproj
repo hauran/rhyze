@@ -11,6 +11,9 @@
 		C506B6ED1794C5E000087032 /* AlarmGoingOffViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C506B6EB1794C5E000087032 /* AlarmGoingOffViewController.m */; };
 		C506B6EE1794C5E000087032 /* AlarmGoingOffViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C506B6EC1794C5E000087032 /* AlarmGoingOffViewController.xib */; };
 		C506B6F21794EDE300087032 /* Alarm.m in Sources */ = {isa = PBXBuildFile; fileRef = C506B6F11794EDE300087032 /* Alarm.m */; };
+		C506B6F4179B791100087032 /* ring.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C506B6F3179B791100087032 /* ring.mp3 */; };
+		C506B6F6179B7D4900087032 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C506B6F5179B7D4900087032 /* AVFoundation.framework */; };
+		C506B6F8179BB2D100087032 /* ring.aiff in Resources */ = {isa = PBXBuildFile; fileRef = C506B6F7179BB2D100087032 /* ring.aiff */; };
 		C5413E52177D146F008D648E /* NewAlarmModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C5413E50177D146F008D648E /* NewAlarmModalViewController.m */; };
 		C5413E53177D146F008D648E /* NewAlarmModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C5413E51177D146F008D648E /* NewAlarmModalViewController.xib */; };
 		C57E9D7C178E6E9E00F436E0 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C57E9D7B178E6E9E00F436E0 /* FontAwesome.ttf */; };
@@ -41,6 +44,9 @@
 		C506B6EC1794C5E000087032 /* AlarmGoingOffViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlarmGoingOffViewController.xib; sourceTree = "<group>"; };
 		C506B6F01794EDE300087032 /* Alarm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alarm.h; sourceTree = "<group>"; };
 		C506B6F11794EDE300087032 /* Alarm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Alarm.m; sourceTree = "<group>"; };
+		C506B6F3179B791100087032 /* ring.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = ring.mp3; path = sounds/ring.mp3; sourceTree = "<group>"; };
+		C506B6F5179B7D4900087032 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		C506B6F7179BB2D100087032 /* ring.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; name = ring.aiff; path = sounds/ring.aiff; sourceTree = "<group>"; };
 		C5413E4F177D146F008D648E /* NewAlarmModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewAlarmModalViewController.h; sourceTree = "<group>"; };
 		C5413E50177D146F008D648E /* NewAlarmModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewAlarmModalViewController.m; sourceTree = "<group>"; };
 		C5413E51177D146F008D648E /* NewAlarmModalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewAlarmModalViewController.xib; sourceTree = "<group>"; };
@@ -77,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C506B6F6179B7D4900087032 /* AVFoundation.framework in Frameworks */,
 				C58CB16D176968A900240A04 /* UIKit.framework in Frameworks */,
 				C58CB16F176968A900240A04 /* Foundation.framework in Frameworks */,
 				C58CB171176968A900240A04 /* CoreGraphics.framework in Frameworks */,
@@ -102,6 +109,7 @@
 		C58CB160176968A900240A04 = {
 			isa = PBXGroup;
 			children = (
+				C506B6F5179B7D4900087032 /* AVFoundation.framework */,
 				C57E9D8D178E705800F436E0 /* NSString+FontAwesome.h */,
 				C57E9D8E178E705800F436E0 /* NSString+FontAwesome.m */,
 				C58CB19217696B7500240A04 /* QuartzCore.framework */,
@@ -150,6 +158,8 @@
 		C58CB173176968A900240A04 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C506B6F7179BB2D100087032 /* ring.aiff */,
+				C506B6F3179B791100087032 /* ring.mp3 */,
 				C57E9D81178E6FC200F436E0 /* add.png */,
 				C57E9D82178E6FC200F436E0 /* addOver.png */,
 				C57E9D83178E6FC200F436E0 /* close.png */,
@@ -234,6 +244,8 @@
 				C57E9D8B178E6FC200F436E0 /* save.png in Resources */,
 				C57E9D8C178E6FC200F436E0 /* saveOver.png in Resources */,
 				C506B6EE1794C5E000087032 /* AlarmGoingOffViewController.xib in Resources */,
+				C506B6F4179B791100087032 /* ring.mp3 in Resources */,
+				C506B6F8179BB2D100087032 /* ring.aiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
